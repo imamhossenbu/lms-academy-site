@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
+import { getAcademy } from "@/lib/tenant";
+import type { AcademyProfile } from "@/types/academy";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { MaintenanceBar } from "@/components/layout/MaintenanceBar";
+import { AcademyUnavailable, NoAcademy, ServiceDown } from "@/components/states/AcademyStates";
 import "./globals.css";
 
 const aeonik = localFont({
@@ -15,16 +21,49 @@ const aeonik = localFont({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: { default: "Academy", template: "%s · Academy" },
-  description: "Courses, live classes and certificates from your academy.",
-};
+/** null = no academy at this address; "error" = backend unreachable. */
+async function loadAcademy(): Promise<AcademyProfile | null | "error"> {
+  try {
+    return await getAcademy();
+  } catch {
+    return "error";
+  }
+}
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export async function generateMetadata(): Promise<Metadata> {
+  const academy = await loadAcademy();
+  if (!academy || academy === "error") return { title: "Academy", robots: { index: false } };
+  return {
+    title: { default: academy.tagline ? `${academy.name} — ${academy.tagline}` : academy.name, template: `%s · ${academy.name}` },
+    description: academy.tagline || `Online courses from ${academy.name}.`,
+    icons: academy.branding.faviconUrl ? { icon: academy.branding.faviconUrl } : undefined,
+    openGraph: { siteName: academy.name, type: "website" },
+    robots: academy.available ? undefined : { index: false },
+  };
+}
+
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const academy = await loadAcademy();
+  const ok = academy && academy !== "error" && academy.available ? academy : null;
+  const accent = academy && academy !== "error" ? academy.branding.accent : "orange";
+
   return (
-    <html lang="en" className={aeonik.variable}>
+    <html lang="en" className={aeonik.variable} data-accent={accent}>
       <body className={`${aeonik.className} antialiased min-h-screen bg-white font-sans text-primary-500`} suppressHydrationWarning>
-        <main>{children}</main>
+        {academy === "error" ? (
+          <ServiceDown />
+        ) : !academy ? (
+          <NoAcademy />
+        ) : !ok ? (
+          <AcademyUnavailable name={academy.name} />
+        ) : (
+          <>
+            {ok.maintenance.enabled && <MaintenanceBar message={ok.maintenance.message} until={ok.maintenance.until} />}
+            <SiteHeader brand={{ name: ok.name, initials: ok.logoInitials, logoUrl: ok.branding.logoUrl, logoDarkUrl: ok.branding.logoDarkUrl }} />
+            <main>{children}</main>
+            <SiteFooter academy={ok} />
+          </>
+        )}
         <Toaster position="top-right" richColors />
       </body>
     </html>

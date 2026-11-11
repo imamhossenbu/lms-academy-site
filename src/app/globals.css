@@ -1005,3 +1005,76 @@ body {
     font-size: 48px;
   }
 }
+
+/* ---------------------------------------------------------------- academy accent */
+/*
+ * Each academy picks its accent in the admin panel (Settings › Branding). The root layout sets
+ * <html data-accent="…">; these tokens follow it, so use `bg-accent`, `text-accent`, `border-accent`,
+ * `bg-accent-light`, `bg-accent-soft`, `bg-accent-10`, `bg-accent-20`, `hover:bg-accent-hover`, `academy-glow-btn`.
+ */
+@theme inline {
+  --color-accent: var(--academy-accent);
+  --color-accent-hover: var(--academy-accent-hover);
+  --color-accent-light: var(--academy-accent-light);
+  --color-accent-soft: var(--academy-accent-soft);
+  --color-accent-10: color-mix(in srgb, var(--academy-accent) 10%, transparent);
+  --color-accent-20: color-mix(in srgb, var(--academy-accent) 20%, transparent);
+  --color-accent-ink: var(--academy-accent-ink);
+}
+:root {
+  --academy-accent: #FF5B00;
+  --academy-accent-hover: #EA5200;
+  --academy-accent-light: #FFF4ED;
+  --academy-accent-soft: #FFF9F5;
+  --academy-accent-ink: #0B101B;
+}
+:root[data-accent="blue"] {
+  --academy-accent: #2570FC;
+  --academy-accent-hover: #1D5FDB;
+  --academy-accent-light: #EEF4FF;
+  --academy-accent-soft: #F6F9FF;
+  --academy-accent-ink: #0A1A3A;
+}
+:root[data-accent="green"] {
+  --academy-accent: #059669;
+  --academy-accent-hover: #047857;
+  --academy-accent-light: #ECFDF5;
+  --academy-accent-soft: #F5FEFA;
+  --academy-accent-ink: #052E22;
+}
+:root[data-accent="purple"] {
+  --academy-accent: #7C3AED;
+  --academy-accent-hover: #6D28D9;
+  --academy-accent-light: #F5F0FF;
+  --academy-accent-soft: #FAF7FF;
+  --academy-accent-ink: #1E0B47;
+}
+:root[data-accent="navy"] {
+  --academy-accent: #1E3A8A;
+  --academy-accent-hover: #172E6E;
+  --academy-accent-light: #EEF2FB;
+  --academy-accent-soft: #F7F9FD;
+  --academy-accent-ink: #0B1433;
+}
+.academy-glow-btn {
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--academy-accent) 32%, transparent);
+}
+.academy-glow-btn:hover {
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--academy-accent) 45%, transparent);
+}
+
+/* Course description (sanitised rich text from the course builder). */
+.academy-prose { color: #334155; font-size: 16px; line-height: 170%; }
+.academy-prose > * + * { margin-top: 0.9em; }
+.academy-prose h2, .academy-prose h3, .academy-prose h4 { color: #0F172A; font-weight: 700; line-height: 130%; margin-top: 1.4em; }
+.academy-prose h2 { font-size: 22px; }
+.academy-prose h3 { font-size: 19px; }
+.academy-prose h4 { font-size: 17px; }
+.academy-prose ul { list-style: disc; padding-left: 1.3em; }
+.academy-prose ol { list-style: decimal; padding-left: 1.3em; }
+.academy-prose li + li { margin-top: 0.35em; }
+.academy-prose a { color: var(--academy-accent); text-decoration: underline; text-underline-offset: 2px; }
+.academy-prose blockquote { border-left: 3px solid var(--academy-accent); padding-left: 1em; color: #64748B; }
+.academy-prose code { background: #F1F5F9; border-radius: 6px; padding: 0.1em 0.35em; font-size: 0.9em; }
+.academy-prose pre { background: #0F172A; color: #E2E8F0; border-radius: 12px; padding: 1em; overflow-x: auto; }
+.academy-prose strong, .academy-prose b { color: #0F172A; font-weight: 600; }

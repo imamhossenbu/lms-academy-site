@@ -12,7 +12,7 @@ export default async function InstructorsPage() {
   const instructors = await fetchInstructors(academy.slug);
   return (
     <>
-      <PageHero compact eyebrow="Our instructors" eyebrowIcon={<Users className="h-4 w-4" />} title="Meet the people who teach" highlight="who teach" subtitle={`Every course at ${academy.name} is built and taught by the instructors below.`} />
+      <PageHero compact eyebrow="Our instructors" eyebrowIcon={<Users className="h-4 w-4" />} title="Our_ Instructors" subtitle={`Every course at ${academy.name} is built and taught by the instructors below.`} />
       <InstructorGrid instructors={instructors} />
     </>
   );

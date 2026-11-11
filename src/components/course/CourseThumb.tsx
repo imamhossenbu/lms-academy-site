@@ -11,10 +11,10 @@ export function CourseThumb({ src, title, className, priority, sizes = "(min-wid
         <Image src={src} alt={title} fill sizes={sizes} priority={priority} className="object-cover transition-transform duration-500 group-hover:scale-105" />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-accent-light via-accent-soft to-accent-20 p-6 text-center">
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-accent shadow-sm">
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-night-surface text-accent shadow-sm">
             <GraduationCap className="h-6 w-6" />
           </span>
-          <span className="body-sm-medium line-clamp-2 text-primary-400">{title}</span>
+          <span className="body-sm-medium line-clamp-2 text-night-soft">{title}</span>
         </div>
       )}
     </div>

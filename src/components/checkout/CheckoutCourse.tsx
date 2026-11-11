@@ -7,7 +7,7 @@ import { CourseThumb } from "@/components/course/CourseThumb";
 /** The course being bought: cover, title, instructor and level. */
 export function CheckoutCourse({ course }: { course: CheckoutQuote["course"] }) {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-dash bg-white p-4 sm:flex-row sm:items-center">
+    <div className="flex flex-col gap-4 rounded-2xl border border-night-line bg-night-surface p-4 sm:flex-row sm:items-center">
       <Link href={`/courses/${course.slug}`} className="w-full shrink-0 overflow-hidden rounded-xl sm:w-44">
         <CourseThumb src={course.thumbnail} title={course.title} sizes="176px" />
       </Link>
@@ -24,10 +24,10 @@ export function CheckoutCourse({ course }: { course: CheckoutQuote["course"] }) 
             </ToneBadge>
           )}
         </div>
-        <Link href={`/courses/${course.slug}`} className="heading-h5 mt-2 block font-semibold text-primary-500 hover:text-accent">
+        <Link href={`/courses/${course.slug}`} className="heading-h5 mt-2 block font-semibold text-white hover:text-accent">
           {course.title}
         </Link>
-        <p className="body-sm-regular mt-1 text-primary-300">By {course.instructor}</p>
+        <p className="body-sm-regular mt-1 text-night-muted">By {course.instructor}</p>
       </div>
     </div>
   );

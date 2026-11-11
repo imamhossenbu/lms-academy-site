@@ -13,7 +13,7 @@ export function CourseDescription({ description, requirements, tags }: { descrip
         <DetailSection title="Requirements">
           <ul className="space-y-2.5">
             {requirements.map((r) => (
-              <li key={r} className="flex items-start gap-3 body-regular text-primary-400">
+              <li key={r} className="flex items-start gap-3 body-regular text-night-soft">
                 <Check className="mt-1 h-4 w-4 shrink-0 text-accent" />
                 {r}
               </li>

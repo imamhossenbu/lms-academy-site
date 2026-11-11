@@ -18,7 +18,7 @@ export function MobileMenu({ onClose, user }: { onClose: () => void; user: Heade
       <div className="space-y-1 px-1 pb-4 pt-2">
         {NAV_LINKS.map((l, i) => (
           <motion.div key={l.href} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.04 * i }}>
-            <Link href={l.href} onClick={onClose} className={cn("block rounded-xl px-3 py-2.5 body-medium", isActive(pathname, l.href) ? "bg-accent-light text-accent" : "text-primary-500")}>
+            <Link href={l.href} onClick={onClose} className={cn("block rounded-xl px-3 py-2.5 body-medium", isActive(pathname, l.href) ? "bg-accent-light text-accent" : "text-white")}>
               {l.label}
             </Link>
           </motion.div>

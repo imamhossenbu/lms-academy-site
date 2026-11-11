@@ -25,7 +25,7 @@ export function CatalogResults({ courses, currency, page, totalPages }: { course
           title="No courses match"
           text="Try a different search or remove a filter to see more courses."
           action={
-            <motion.button type="button" whileTap={{ scale: 0.96 }} onClick={clearAll} className="h-10 rounded-xl border border-dash bg-white px-4 body-sm-medium text-primary-500 hover:border-primary-300">
+            <motion.button type="button" whileTap={{ scale: 0.96 }} onClick={clearAll} className="h-10 rounded-xl border border-night-line bg-night-surface px-4 body-sm-medium text-white hover:border-night-line-strong">
               Clear filters
             </motion.button>
           }

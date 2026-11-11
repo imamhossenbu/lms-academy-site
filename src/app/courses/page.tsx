@@ -19,7 +19,7 @@ async function Catalog({ searchParams }: { searchParams: Promise<CatalogParams> 
 
   return (
     <CatalogProvider>
-      <PageHero compact eyebrow="Course catalogue" eyebrowIcon={<BookOpen className="h-4 w-4" />} title="Find your next course" highlight="next course" subtitle={`Browse ${academy.stats.courses === 1 ? "our course" : `all ${academy.stats.courses} courses`} from ${academy.name}.`}>
+      <PageHero compact eyebrow="Course catalogue" eyebrowIcon={<BookOpen className="h-4 w-4" />} title="Our Courses_" subtitle={`Browse ${academy.stats.courses === 1 ? "our course" : `all ${academy.stats.courses} courses`} from ${academy.name}.`}>
         <CatalogSearch />
       </PageHero>
       <CatalogBody

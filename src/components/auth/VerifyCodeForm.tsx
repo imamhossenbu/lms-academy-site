@@ -63,8 +63,8 @@ export function VerifyCodeForm({ email, next }: { email: string; next: string })
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent-light text-accent">
           <MailCheck className="h-5 w-5" />
         </span>
-        <p className="body-sm-regular text-primary-400">
-          Code sent to <span className="break-all font-semibold text-primary-500">{email}</span>
+        <p className="body-sm-regular text-night-soft">
+          Code sent to <span className="break-all font-semibold text-white">{email}</span>
         </p>
       </div>
       <Controller control={control} name="code" render={({ field, fieldState }) => <CodeInput value={field.value} onChange={field.onChange} invalid={!!fieldState.error} disabled={formState.isSubmitting} />} />
@@ -73,10 +73,10 @@ export function VerifyCodeForm({ email, next }: { email: string; next: string })
         Confirm email
       </SubmitButton>
       <div className="flex items-center justify-between body-sm-regular">
-        <Link href={`/signup?next=${encodeURIComponent(next)}`} className="text-primary-300 hover:text-primary-500">
+        <Link href={`/signup?next=${encodeURIComponent(next)}`} className="text-night-muted hover:text-white">
           Use a different email
         </Link>
-        <button type="button" onClick={resend} disabled={wait > 0 || sending} className="body-sm-medium text-accent disabled:text-primary-300">
+        <button type="button" onClick={resend} disabled={wait > 0 || sending} className="body-sm-medium text-accent disabled:text-night-muted">
           {wait > 0 ? `Resend in ${wait}s` : "Resend code"}
         </button>
       </div>

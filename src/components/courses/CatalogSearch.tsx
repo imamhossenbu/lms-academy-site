@@ -25,15 +25,15 @@ export function CatalogSearch() {
   }, [value, current, update]);
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-dash bg-white px-4 shadow-xl shadow-primary-500/5 transition-colors focus-within:border-accent">
-      <Search className="h-5 w-5 shrink-0 text-primary-300" />
+    <div className="mx-auto flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-night-line bg-night-surface px-4 shadow-xl shadow-black/40 transition-colors focus-within:border-accent">
+      <Search className="h-5 w-5 shrink-0 text-night-muted" />
       <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Search courses, skills or topics"
         aria-label="Search courses"
         maxLength={100}
-        className="min-w-0 flex-1 bg-transparent py-4 body-regular text-primary-500 outline-none placeholder:text-primary-300"
+        className="min-w-0 flex-1 bg-transparent py-4 body-regular text-white outline-none placeholder:text-night-muted"
       />
       <AnimatePresence mode="wait" initial={false}>
         {pending ? (
@@ -41,7 +41,7 @@ export function CatalogSearch() {
             <Loader2 className="h-4 w-4 animate-spin text-accent" />
           </motion.span>
         ) : value ? (
-          <motion.button key="clear" type="button" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} whileTap={{ scale: 0.9 }} onClick={() => setValue("")} className="flex h-7 w-7 items-center justify-center rounded-full text-primary-300 hover:bg-slate-100 hover:text-primary-500" aria-label="Clear search">
+          <motion.button key="clear" type="button" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} whileTap={{ scale: 0.9 }} onClick={() => setValue("")} className="flex h-7 w-7 items-center justify-center rounded-full text-night-muted hover:bg-night-skeleton hover:text-white" aria-label="Clear search">
             <X className="h-4 w-4" />
           </motion.button>
         ) : null}

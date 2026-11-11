@@ -45,11 +45,11 @@ export function UserMenu({ user }: { user: HeaderUser }) {
 
   return (
     <div ref={ref} className="relative">
-      <motion.button type="button" whileTap={{ scale: 0.96 }} onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-haspopup="menu" className="flex items-center gap-2 rounded-full border border-dash bg-white py-1 pl-1 pr-3 transition-colors hover:border-primary-300">
+      <motion.button type="button" whileTap={{ scale: 0.96 }} onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-haspopup="menu" className="flex items-center gap-2 rounded-full border border-night-line bg-night-surface py-1 pl-1 pr-3 transition-colors hover:border-night-line-strong">
         <Avatar name={user.name} src={user.avatar} size="sm" />
-        <span className="max-w-28 truncate body-sm-medium text-primary-500">{user.name.split(" ")[0]}</span>
+        <span className="max-w-28 truncate body-sm-medium text-white">{user.name.split(" ")[0]}</span>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronDown className="h-4 w-4 text-primary-300" />
+          <ChevronDown className="h-4 w-4 text-night-muted" />
         </motion.span>
       </motion.button>
       <AnimatePresence>
@@ -60,14 +60,14 @@ export function UserMenu({ user }: { user: HeaderUser }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full z-50 mt-2 w-64 origin-top-right overflow-hidden rounded-2xl border border-dash bg-white shadow-xl shadow-primary-500/10"
+            className="absolute right-0 top-full z-50 mt-2 w-64 origin-top-right overflow-hidden rounded-2xl border border-night-line bg-night-surface shadow-xl shadow-black/40"
           >
-            <div className="border-b border-dash px-4 py-3">
-              <p className="body-sm-medium truncate font-semibold text-primary-500">{user.name}</p>
-              <p className="body-xsm-regular truncate text-primary-300">{user.email}</p>
+            <div className="border-b border-night-line px-4 py-3">
+              <p className="body-sm-medium truncate font-semibold text-white">{user.name}</p>
+              <p className="body-xsm-regular truncate text-night-muted">{user.email}</p>
             </div>
             <div className="p-1.5">
-              <Link href="/my-courses" role="menuitem" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 body-sm-medium text-primary-500 hover:bg-accent-soft hover:text-accent">
+              <Link href="/my-courses" role="menuitem" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 body-sm-medium text-white hover:bg-accent-soft hover:text-accent">
                 <BookOpen className="h-4 w-4" />
                 My courses
               </Link>

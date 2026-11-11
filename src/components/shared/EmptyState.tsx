@@ -11,11 +11,11 @@ export function EmptyState({ icon, title, text, action, className }: { icon: Rea
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className={cn("mx-auto flex max-w-md flex-col items-center rounded-2xl border border-dashed border-dash bg-white px-6 py-12 text-center", className)}
+      className={cn("mx-auto flex max-w-md flex-col items-center rounded-2xl border border-dashed border-night-line bg-night-surface px-6 py-12 text-center", className)}
     >
       <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-accent-light text-accent">{icon}</span>
-      <h3 className="heading-h5 mt-4 font-semibold text-primary-500">{title}</h3>
-      <p className="body-sm-regular mt-1.5 text-primary-300">{text}</p>
+      <h3 className="heading-h5 mt-4 font-semibold text-white">{title}</h3>
+      <p className="body-sm-regular mt-1.5 text-night-muted">{text}</p>
       {action && <div className="mt-5">{action}</div>}
     </motion.div>
   );

@@ -13,7 +13,7 @@ import { ToneBadge } from "@/components/ui/ToneBadge";
 /** Dark band at the top of a course page: breadcrumbs, title, summary, rating, learners, instructor, level and language. */
 export function CourseHeader({ course }: { course: AcademyCourseDetail }) {
   return (
-    <section className="relative isolate overflow-hidden bg-brand-navy text-white">
+    <section className="relative isolate overflow-hidden bg-night-deep text-white">
       <div className="absolute -left-40 -top-40 -z-10 h-112 w-112 rounded-full bg-accent-20 blur-3xl" aria-hidden />
       <div className="absolute -bottom-40 right-0 -z-10 h-96 w-96 rounded-full bg-accent-10 blur-3xl" aria-hidden />
       <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, ease: "easeOut" }} className="mx-auto max-w-7xl px-4 pb-14 pt-10 sm:px-6 lg:pb-16">

@@ -1,33 +1,34 @@
 "use client";
 
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { ButtonLink } from "@/components/ui/ButtonLink";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { CursorTitle } from "@/components/shared/SectionHeading";
+import { PerspectiveGrid } from "@/components/decor/PerspectiveGrid";
+import { ExploreButton } from "./HomeHero";
 
-/** Accent banner before the footer: one line pitch, browse + contact buttons. */
+/** Neon closing banner: cursor headline, one line, Explore + Talk to us, grid floor glowing underneath. */
 export function FinalCta({ academyName }: { academyName: string }) {
-  const reduce = useReducedMotion();
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+    <section className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="relative isolate overflow-hidden rounded-3xl bg-gradient-to-br from-accent to-accent-hover px-6 py-14 text-center sm:px-12"
+        className="academy-card-glow relative isolate overflow-hidden rounded-3xl border border-accent/30 bg-night-surface px-6 pb-28 pt-16 text-center sm:px-12"
       >
-        <motion.div className="absolute -left-20 -top-20 -z-10 h-72 w-72 rounded-full bg-white/15 blur-2xl" animate={reduce ? undefined : { scale: [1, 1.15, 1] }} transition={{ duration: 8, repeat: Infinity }} aria-hidden />
-        <motion.div className="absolute -bottom-24 -right-16 -z-10 h-80 w-80 rounded-full bg-white/10 blur-2xl" animate={reduce ? undefined : { scale: [1.1, 1, 1.1] }} transition={{ duration: 9, repeat: Infinity }} aria-hidden />
-        <h2 className="heading-section text-white">Ready to start learning?</h2>
-        <p className="body-hero mx-auto mt-4 max-w-2xl text-white/80">Find the course that fits your goals and take the first step with {academyName} today.</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <ButtonLink href="/courses" variant="light" size="lg" icon={<ArrowRight className="h-4 w-4" />}>
-            Browse courses
-          </ButtonLink>
-          <ButtonLink href="/contact" variant="ghost" size="lg" className="border border-white/40 text-white hover:bg-white/10 hover:text-white">
+        <div className="absolute inset-x-0 -top-24 -z-10 mx-auto h-64 w-2/3 rounded-full bg-accent opacity-25 blur-[100px]" aria-hidden />
+        <PerspectiveGrid className="h-36" />
+        <h2 className="heading-section text-white">
+          <CursorTitle text="Ready to start_ learning?" />
+        </h2>
+        <p className="body-hero mx-auto mt-4 max-w-2xl text-night-soft">Find the course that fits your goals and take the first step with {academyName} today.</p>
+        <div className="mt-9 flex flex-wrap justify-center gap-3">
+          <ExploreButton href="/courses" label="Browse courses" />
+          <Link href="/contact" className="inline-flex h-12 items-center rounded-xl border border-night-line-strong px-6 body-medium text-white transition-colors hover:border-accent hover:text-accent">
             Talk to us
-          </ButtonLink>
+          </Link>
         </div>
       </motion.div>
     </section>

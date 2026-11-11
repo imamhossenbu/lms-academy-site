@@ -13,7 +13,7 @@ export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(({ label, error, leftElement, rightElement, id, className, containerClassName, ...props }, ref) => (
   <div className={cn("w-full", containerClassName)}>
     {label && (
-      <label htmlFor={id} className="mb-1.5 block select-none body-sm-medium text-primary-400">
+      <label htmlFor={id} className="mb-1.5 block select-none body-sm-medium text-night-soft">
         {label}
       </label>
     )}
@@ -24,16 +24,16 @@ export const InputField = forwardRef<HTMLInputElement, InputFieldProps>(({ label
         aria-invalid={!!error}
         aria-describedby={error && id ? `${id}-error` : undefined}
         className={cn(
-          "h-12 w-full rounded-xl border bg-white py-2 body-regular text-primary-500 outline-none transition-all placeholder:text-primary-300 focus:border-accent focus:ring-4 focus:ring-accent-10",
-          error ? "border-red bg-red-14" : "border-dash",
+          "h-12 w-full rounded-xl border bg-night-surface py-2 body-regular text-white outline-none transition-all placeholder:text-night-muted focus:border-accent focus:ring-4 focus:ring-accent-10",
+          error ? "border-red bg-red-14" : "border-night-line",
           leftElement ? "pl-11" : "pl-4",
           rightElement ? "pr-11" : "pr-4",
           className,
         )}
         {...props}
       />
-      {leftElement && <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-primary-300">{leftElement}</div>}
-      {rightElement && <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-primary-300">{rightElement}</div>}
+      {leftElement && <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-night-muted">{leftElement}</div>}
+      {rightElement && <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-night-muted">{rightElement}</div>}
     </div>
     {error && (
       <p id={id ? `${id}-error` : undefined} className="mt-1.5 body-xsm-regular text-red">

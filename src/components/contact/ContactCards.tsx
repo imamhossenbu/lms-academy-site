@@ -34,20 +34,20 @@ export function ContactCards({ email, phone, address, website }: { email: string
             <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-light text-accent transition-colors group-hover:bg-accent group-hover:text-white">
               <c.icon className="h-5 w-5" />
             </span>
-            <span className="mt-4 block body-sm-medium text-primary-300">{c.title}</span>
-            <span className="mt-1 block heading-h5 break-words font-semibold text-primary-500">{c.value}</span>
-            <span className="mt-2 block body-sm-regular text-primary-300">{c.hint}</span>
+            <span className="mt-4 block body-sm-medium text-night-muted">{c.title}</span>
+            <span className="mt-1 block heading-h5 break-words font-semibold text-white">{c.value}</span>
+            <span className="mt-2 block body-sm-regular text-night-muted">{c.hint}</span>
           </>
         );
         return (
           <StaggerItem key={c.title} className="h-full">
             <motion.div whileHover={{ y: -4 }} className="h-full">
               {c.href ? (
-                <a href={c.href} target={c.title === "Website" ? "_blank" : undefined} rel="noopener noreferrer" className="group block h-full rounded-2xl border border-dash bg-white p-6 transition-shadow hover:shadow-lg hover:shadow-primary-500/5">
+                <a href={c.href} target={c.title === "Website" ? "_blank" : undefined} rel="noopener noreferrer" className="group block h-full rounded-2xl border border-night-line bg-night-surface p-6 transition-shadow hover:shadow-lg hover:shadow-black/40">
                   {body}
                 </a>
               ) : (
-                <div className="group h-full rounded-2xl border border-dash bg-white p-6">{body}</div>
+                <div className="group h-full rounded-2xl border border-night-line bg-night-surface p-6">{body}</div>
               )}
             </motion.div>
           </StaggerItem>

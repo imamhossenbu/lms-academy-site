@@ -22,7 +22,7 @@ export function SubmitButton({ children, loading, loadingText, icon, size = "lg"
       disabled={off}
       whileTap={off ? undefined : { scale: 0.97 }}
       className={cn(
-        "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-accent text-white transition-colors hover:bg-accent-hover academy-glow-btn disabled:cursor-not-allowed disabled:opacity-60",
+        "group relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl academy-gradient text-white transition-shadow academy-glow-btn disabled:cursor-not-allowed disabled:opacity-60",
         size === "lg" ? "h-12 px-6 body-medium" : "h-11 px-5 body-sm-medium",
         className,
       )}

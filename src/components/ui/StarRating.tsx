@@ -12,7 +12,7 @@ export function StarRating({ value, size = "sm", className }: { value: number; s
         const fill = rounded >= i ? 1 : rounded >= i - 0.5 ? 0.5 : 0;
         return (
           <span key={i} className={cn("relative inline-flex", px)}>
-            <Star className={cn("absolute inset-0 text-slate-200 fill-slate-200", px)} />
+            <Star className={cn("absolute inset-0 text-white/15 fill-white/15", px)} />
             {fill > 0 && (
               <span className="absolute inset-0 overflow-hidden" style={{ width: `${fill * 100}%` }}>
                 <Star className={cn("text-yellow fill-yellow", px)} />

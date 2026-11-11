@@ -22,7 +22,7 @@ export function DesktopNav() {
           href={l.href}
           onMouseEnter={() => setHover(l.href)}
           aria-current={active === l.href ? "page" : undefined}
-          className={cn("relative rounded-xl px-4 py-2 body-sm-medium transition-colors", active === l.href ? "text-accent" : "text-primary-500 hover:text-accent")}
+          className={cn("relative rounded-xl px-4 py-2 body-sm-medium transition-colors", active === l.href ? "text-accent" : "text-white hover:text-accent")}
         >
           {pillAt === l.href && <motion.span layoutId="nav-pill" className="absolute inset-0 -z-10 rounded-xl bg-accent-light" transition={{ type: "spring", stiffness: 420, damping: 34 }} />}
           {l.label}

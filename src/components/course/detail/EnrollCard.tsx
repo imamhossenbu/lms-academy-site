@@ -42,7 +42,7 @@ export function EnrollCard({ course, currency, signedIn, enrolled }: { course: A
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-      className="overflow-hidden rounded-3xl border border-dash bg-white shadow-2xl shadow-primary-500/10"
+      className="overflow-hidden rounded-3xl border border-night-line bg-night-surface shadow-2xl shadow-black/40"
       id="enroll"
     >
       <CourseThumb src={course.thumbnail} title={course.title} priority sizes="380px" />
@@ -58,21 +58,21 @@ export function EnrollCard({ course, currency, signedIn, enrolled }: { course: A
           </>
         ) : (
           <>
-            <p className="heading-h1-bold text-primary-500">{formatPrice(course.price, currency, course.isFree)}</p>
+            <p className="heading-h1-bold text-white">{formatPrice(course.price, currency, course.isFree)}</p>
             <ButtonLink href={signedIn ? checkoutPath : `/signup?next=${encodeURIComponent(checkoutPath)}`} size="lg" className="mt-5 w-full" icon={<ArrowRight className="h-4 w-4" />}>
               {course.isFree ? "Enroll for free" : "Enroll now"}
             </ButtonLink>
           </>
         )}
-        <motion.button type="button" whileTap={{ scale: 0.97 }} onClick={share} className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dash body-sm-medium text-primary-500 transition-colors hover:border-primary-300">
+        <motion.button type="button" whileTap={{ scale: 0.97 }} onClick={share} className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-night-line body-sm-medium text-white transition-colors hover:border-night-line-strong">
           <Link2 className="h-4 w-4" />
           Share course
         </motion.button>
 
-        <h3 className="body-sm-medium mt-6 font-semibold text-primary-500">This course includes</h3>
+        <h3 className="body-sm-medium mt-6 font-semibold text-white">This course includes</h3>
         <ul className="mt-3 space-y-2.5">
           {includes.map((i) => (
-            <li key={i.text} className="flex items-center gap-2.5 body-sm-regular text-primary-400">
+            <li key={i.text} className="flex items-center gap-2.5 body-sm-regular text-night-soft">
               <i.icon className="h-4 w-4 shrink-0 text-accent" />
               {i.text}
             </li>

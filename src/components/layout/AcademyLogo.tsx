@@ -17,10 +17,10 @@ export function AcademyLogo({ brand, tone = "dark", asLink = true, className }: 
     <Image src={src} alt={brand.name} width={160} height={40} className="h-9 w-auto max-w-40 object-contain" priority />
   ) : (
     <>
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-hover body-sm-medium font-bold text-white shadow-md shadow-accent-20">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl academy-gradient body-sm-medium font-bold text-white shadow-md shadow-accent-20">
         {brand.initials}
       </span>
-      <span className={cn("heading-h5 max-w-52 truncate font-bold tracking-tight", tone === "light" ? "text-white" : "text-primary-500")}>{brand.name}</span>
+      <span className={cn("heading-h5 max-w-52 truncate font-bold tracking-tight", tone === "light" ? "text-white" : "text-white")}>{brand.name}</span>
     </>
   );
   const cls = cn("inline-flex min-w-0 items-center gap-2.5", className);

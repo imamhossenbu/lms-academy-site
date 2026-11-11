@@ -18,7 +18,7 @@ export function SiteFooter({ academy }: { academy: AcademyProfile }) {
   ].filter(Boolean) as { icon: React.ReactNode; label: string; href?: string }[];
 
   return (
-    <footer className="relative overflow-hidden bg-brand-navy text-white">
+    <footer className="relative overflow-hidden bg-night-deep text-white">
       <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full bg-accent-20 blur-3xl" aria-hidden />
       <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>

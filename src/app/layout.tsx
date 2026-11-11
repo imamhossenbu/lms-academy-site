@@ -51,7 +51,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <html lang="en" className={aeonik.variable} data-accent={accent}>
-      <body className={`${aeonik.className} antialiased min-h-screen bg-white font-sans text-primary-500`} suppressHydrationWarning>
+      <body className={`${aeonik.className} antialiased min-h-screen bg-night-surface font-sans text-white`} suppressHydrationWarning>
         {academy === "error" ? (
           <ServiceDown />
         ) : !academy ? (

@@ -5,7 +5,7 @@ import { Wrench } from "lucide-react";
 export function MaintenanceBar({ message, until }: { message: string; until: string }) {
   const when = until ? new Date(until) : null;
   return (
-    <div className="border-b border-yellow bg-yellow-bg">
+    <div className="border-b border-yellow bg-yellow/15">
       <p className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center body-xsm-medium text-yellow sm:px-6">
         <Wrench className="h-3.5 w-3.5 shrink-0" />
         <span>

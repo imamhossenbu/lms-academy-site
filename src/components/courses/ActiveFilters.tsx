@@ -38,7 +38,7 @@ export function ActiveFilters({ categories, instructor }: { categories: AcademyC
           </motion.button>
         ))}
       </AnimatePresence>
-      <button type="button" onClick={clearAll} className="body-xsm-medium text-primary-300 underline-offset-2 hover:text-primary-500 hover:underline">
+      <button type="button" onClick={clearAll} className="body-xsm-medium text-night-muted underline-offset-2 hover:text-white hover:underline">
         Clear all
       </button>
     </div>

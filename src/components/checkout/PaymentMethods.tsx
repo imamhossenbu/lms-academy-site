@@ -11,8 +11,8 @@ const LOGOS = [
 /** How the learner will pay: SSLCommerz secure page (cards, mobile banking, net banking). */
 export function PaymentMethods() {
   return (
-    <div className="rounded-2xl border border-dash bg-white p-5">
-      <h2 className="body-medium flex items-center gap-2 font-semibold text-primary-500">
+    <div className="rounded-2xl border border-night-line bg-night-surface p-5">
+      <h2 className="body-medium flex items-center gap-2 font-semibold text-white">
         <CreditCard className="h-4 w-4 text-accent" />
         Payment method
       </h2>
@@ -22,11 +22,11 @@ export function PaymentMethods() {
             <span className="h-2 w-2 rounded-full bg-accent" />
           </span>
           <div className="min-w-0">
-            <p className="body-sm-medium font-semibold text-primary-500">Card, mobile banking or net banking</p>
-            <p className="body-xsm-regular mt-0.5 text-primary-300">Visa, Mastercard, bKash, Nagad, Rocket and more — on SSLCommerz&apos;s secure page.</p>
+            <p className="body-sm-medium font-semibold text-white">Card, mobile banking or net banking</p>
+            <p className="body-xsm-regular mt-0.5 text-night-muted">Visa, Mastercard, bKash, Nagad, Rocket and more — on SSLCommerz&apos;s secure page.</p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               {LOGOS.map((l) => (
-                <span key={l.alt} className="flex h-8 items-center rounded-lg border border-dash bg-white px-2.5">
+                <span key={l.alt} className="flex h-8 items-center rounded-lg border border-night-line bg-night-surface px-2.5">
                   <Image src={l.src} alt={l.alt} width={64} height={20} className="h-4 w-auto object-contain" />
                 </span>
               ))}
@@ -34,7 +34,7 @@ export function PaymentMethods() {
           </div>
         </div>
       </div>
-      <p className="mt-3 flex items-center gap-2 body-xsm-regular text-primary-300">
+      <p className="mt-3 flex items-center gap-2 body-xsm-regular text-night-muted">
         <ShieldCheck className="h-4 w-4 text-green" />
         Your payment details go straight to the gateway — we never see your card or PIN.
       </p>

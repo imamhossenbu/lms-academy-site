@@ -8,72 +8,73 @@ import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 interface SectionHeadingProps {
   /** Small pill above the title. */
   eyebrow?: string;
-  /** Icon shown inside the pill, before the text. */
   eyebrowIcon?: React.ReactNode;
+  /** Use "_" where the blinking terminal cursor goes, e.g. "Our Courses_" or "Success_ Story". */
   title: string;
-  /** A word / phrase of `title` to colour in the accent (first match). */
-  highlight?: string;
-  /** Put the highlighted phrase on its own line. */
-  highlightOnNewLine?: boolean;
-  /** Draw a hand-drawn orange stroke under the highlight. */
-  underline?: boolean;
   subtitle?: string;
   align?: "center" | "left";
-  /** Heading level: "h1" for a page hero. */
   as?: "h1" | "h2";
-  /** Animate on mount instead of on scroll-in (for content at the top of a page). */
+  /** Animate on mount instead of on scroll-in (top of a page). */
   onMount?: boolean;
+  /** Gradient bar under the title. */
+  bar?: boolean;
   className?: string;
 }
 
-/** Accent swoosh under a word; draws itself in when the heading appears. */
-function Swoosh() {
+/** Accent "_" terminal cursor (gently pulsing — never fully disappears, so the words never look split). */
+export function Cursor() {
   return (
-    <svg viewBox="0 0 300 16" preserveAspectRatio="none" className="absolute -bottom-2 left-1/4 h-3 w-3/4 text-accent" aria-hidden>
-      <motion.path
-        d="M2 12 C 80 2, 200 1, 298 6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="4"
-        strokeLinecap="round"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-      />
-    </svg>
+    <motion.span className="academy-gradient-text" animate={{ opacity: [1, 0.45, 1] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }} aria-hidden>
+      _
+    </motion.span>
   );
 }
 
-/** Pill eyebrow + large title (optional accent highlight / underline) + intro line, used at the top of each section. */
-export function SectionHeading({ eyebrow, eyebrowIcon, title, highlight, highlightOnNewLine, underline, subtitle, align = "center", as = "h2", onMount = false, className }: SectionHeadingProps) {
-  const at = highlight ? title.indexOf(highlight) : -1;
+/** Title with each "_" rendered as the accent cursor (the academy site's signature heading style). */
+export function CursorTitle({ text }: { text: string }) {
+  const parts = text.split("_");
   return (
-    <Stagger className={cn("max-w-3xl", align === "center" ? "mx-auto text-center" : "text-left", className)} stagger={0.1} onMount={onMount}>
+    <>
+      {parts.map((p, i) => (
+        <React.Fragment key={i}>
+          {p}
+          {i < parts.length - 1 && <Cursor />}
+        </React.Fragment>
+      ))}
+    </>
+  );
+}
+
+/** Eyebrow pill + big white title with the cursor motif + accent gradient bar + intro line. */
+export function SectionHeading({ eyebrow, eyebrowIcon, title, subtitle, align = "center", as = "h2", onMount = false, bar = true, className }: SectionHeadingProps) {
+  const center = align === "center";
+  return (
+    <Stagger className={cn("max-w-3xl", center ? "mx-auto text-center" : "text-left", className)} stagger={0.1} onMount={onMount}>
       {eyebrow && (
         <StaggerItem>
-          <span className="inline-flex items-center gap-2 rounded-full bg-accent-light px-4 py-1.5 body-sm-medium text-accent whitespace-nowrap">
+          <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-accent/30 bg-accent-10 px-4 py-1.5 body-sm-medium text-accent">
             {eyebrowIcon}
             {eyebrow}
           </span>
         </StaggerItem>
       )}
-      <StaggerItem as={as} className="heading-section text-primary-500 mt-4">
-        {at >= 0 ? (
-          <>
-            {title.slice(0, at)}
-            <span className={cn("relative text-accent", highlightOnNewLine ? "block" : "inline-block")}>
-              {highlight}
-              {underline && <Swoosh />}
-            </span>
-            {title.slice(at + highlight!.length)}
-          </>
-        ) : (
-          title
-        )}
+      <StaggerItem as={as} className={cn("heading-section text-white", eyebrow && "mt-4")}>
+        <CursorTitle text={title} />
       </StaggerItem>
+      {bar && (
+        <StaggerItem>
+          <motion.span
+            className={cn("academy-gradient mt-5 block h-1.5 w-20 rounded-full", center && "mx-auto")}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+            aria-hidden
+          />
+        </StaggerItem>
+      )}
       {subtitle && (
-        <StaggerItem as="p" className="body-hero text-primary-300 mt-4">
+        <StaggerItem as="p" className="body-hero mt-5 text-night-muted">
           {subtitle}
         </StaggerItem>
       )}

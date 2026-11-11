@@ -16,7 +16,7 @@ export default async function MyCoursesPage() {
   const items = res.ok ? res.data : [];
   return (
     <>
-      <PageHero compact eyebrow="My learning" eyebrowIcon={<GraduationCap className="h-4 w-4" />} title={`Welcome back, ${session.user.name.split(" ")[0]}`} highlight={session.user.name.split(" ")[0]} subtitle={items.length ? `You're enrolled in ${items.length} ${items.length === 1 ? "course" : "courses"}.` : "Let's find your first course."} />
+      <PageHero compact eyebrow="My learning" eyebrowIcon={<GraduationCap className="h-4 w-4" />} title={`My_ Courses`} subtitle={items.length ? `Welcome back, ${session.user.name.split(" ")[0]}! You're enrolled in ${items.length} ${items.length === 1 ? "course" : "courses"}.` : `Welcome, ${session.user.name.split(" ")[0]}! Let's find your first course.`} />
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6">
         <MyCoursesGrid items={items} />
       </section>

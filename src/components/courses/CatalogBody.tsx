@@ -22,8 +22,8 @@ export function CatalogBody({ result, currency, categories, levels, instructor }
       <div className="min-w-0">
         <div className="mb-6 space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="body-regular text-primary-400">
-              <span className="font-semibold text-primary-500">{total.toLocaleString("en-US")}</span> {total === 1 ? "course" : "courses"}
+            <p className="body-regular text-night-soft">
+              <span className="font-semibold text-white">{total.toLocaleString("en-US")}</span> {total === 1 ? "course" : "courses"}
             </p>
             <div className="flex items-center gap-2">
               <MobileFilters categories={categories} levels={levels} />

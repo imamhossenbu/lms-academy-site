@@ -13,11 +13,11 @@ import { CourseThumb } from "@/components/course/CourseThumb";
 export type ResultStatus = "PAID" | "ENROLLED" | "PENDING" | "FAILED" | "CANCELLED" | "REFUNDED";
 
 const COPY: Record<ResultStatus, { icon: typeof CheckCircle2; tone: string; title: string; text: string }> = {
-  PAID: { icon: CheckCircle2, tone: "bg-green-bg text-green", title: "Payment successful!", text: "You're enrolled. Your course is ready whenever you are." },
-  ENROLLED: { icon: CheckCircle2, tone: "bg-green-bg text-green", title: "You're enrolled!", text: "Your course is ready whenever you are." },
-  PENDING: { icon: Clock, tone: "bg-yellow-bg text-yellow", title: "Confirming your payment…", text: "This usually takes a few seconds. If you were charged, your access will appear shortly." },
+  PAID: { icon: CheckCircle2, tone: "bg-green/15 text-green", title: "Payment successful!", text: "You're enrolled. Your course is ready whenever you are." },
+  ENROLLED: { icon: CheckCircle2, tone: "bg-green/15 text-green", title: "You're enrolled!", text: "Your course is ready whenever you are." },
+  PENDING: { icon: Clock, tone: "bg-yellow/15 text-yellow", title: "Confirming your payment…", text: "This usually takes a few seconds. If you were charged, your access will appear shortly." },
   FAILED: { icon: XCircle, tone: "bg-red-14 text-red", title: "Payment didn't go through", text: "Nothing was charged. You can try again — or use a different payment method." },
-  CANCELLED: { icon: XCircle, tone: "bg-yellow-bg text-yellow", title: "Payment cancelled", text: "You left the payment page before paying. Your order is saved — try again whenever you're ready." },
+  CANCELLED: { icon: XCircle, tone: "bg-yellow/15 text-yellow", title: "Payment cancelled", text: "You left the payment page before paying. Your order is saved — try again whenever you're ready." },
   REFUNDED: { icon: RefreshCw, tone: "bg-blue-14 text-blue", title: "This order was refunded", text: "The payment was returned and course access was removed." },
 };
 
@@ -37,29 +37,29 @@ export function ResultView({ status, course, order }: Props) {
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, ease: "easeOut" }} className="mx-auto max-w-xl px-4 py-16 text-center sm:px-6">
       <motion.span initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.1 }} className={cn("relative mx-auto flex h-20 w-20 items-center justify-center rounded-full", c.tone)}>
-        {success && <motion.span className="absolute inset-0 rounded-full bg-green-bg" initial={{ scale: 1, opacity: 0.8 }} animate={{ scale: 1.6, opacity: 0 }} transition={{ duration: 1.2, repeat: 2 }} aria-hidden />}
+        {success && <motion.span className="absolute inset-0 rounded-full bg-green/15" initial={{ scale: 1, opacity: 0.8 }} animate={{ scale: 1.6, opacity: 0 }} transition={{ duration: 1.2, repeat: 2 }} aria-hidden />}
         <c.icon className={cn("relative h-10 w-10", status === "PENDING" && "animate-pulse")} />
       </motion.span>
-      <h1 className="heading-h1-bold mt-6 text-primary-500">{c.title}</h1>
-      <p className="body-regular mt-3 text-primary-300">{c.text}</p>
+      <h1 className="heading-h1-bold mt-6 text-white">{c.title}</h1>
+      <p className="body-regular mt-3 text-night-muted">{c.text}</p>
 
-      <div className="mt-8 overflow-hidden rounded-2xl border border-dash bg-white text-left">
+      <div className="mt-8 overflow-hidden rounded-2xl border border-night-line bg-night-surface text-left">
         <div className="flex items-center gap-4 p-4">
           <span className="w-28 shrink-0 overflow-hidden rounded-xl">
             <CourseThumb src={course.thumbnail} title={course.title} sizes="112px" />
           </span>
-          <p className="body-medium min-w-0 font-semibold text-primary-500">{course.title}</p>
+          <p className="body-medium min-w-0 font-semibold text-white">{course.title}</p>
         </div>
         {order && (
-          <dl className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-dash bg-gray-bg/50 p-4 body-sm-regular">
-            <dt className="text-primary-300">Order</dt>
-            <dd className="text-right font-medium text-primary-500">{order.number}</dd>
-            <dt className="text-primary-300">Total</dt>
-            <dd className="text-right font-medium text-primary-500">{formatPrice(order.total, order.currency)}</dd>
+          <dl className="grid grid-cols-2 gap-x-4 gap-y-2 border-t border-night-line bg-night-raised/60 p-4 body-sm-regular">
+            <dt className="text-night-muted">Order</dt>
+            <dd className="text-right font-medium text-white">{order.number}</dd>
+            <dt className="text-night-muted">Total</dt>
+            <dd className="text-right font-medium text-white">{formatPrice(order.total, order.currency)}</dd>
             {order.paidAt && (
               <>
-                <dt className="text-primary-300">Paid on</dt>
-                <dd className="text-right font-medium text-primary-500">
+                <dt className="text-night-muted">Paid on</dt>
+                <dd className="text-right font-medium text-white">
                   {formatDate(order.paidAt)}
                   {order.method ? ` · ${order.method}` : ""}
                 </dd>

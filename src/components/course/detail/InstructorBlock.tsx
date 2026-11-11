@@ -17,13 +17,13 @@ export function InstructorBlock({ instructor }: { instructor: AcademyInstructor 
 
   return (
     <DetailSection id="instructor" title="Your instructor">
-      <div className="rounded-2xl border border-dash bg-white p-6">
+      <div className="rounded-2xl border border-night-line bg-night-surface p-6">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
           <Avatar name={instructor.name} src={instructor.avatar} size="xl" />
           <div className="min-w-0 flex-1">
-            <h3 className="heading-h4 font-bold text-primary-500">{instructor.name}</h3>
-            <p className="body-sm-regular text-primary-300">{instructor.headline}</p>
-            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 body-sm-medium text-primary-400">
+            <h3 className="heading-h4 font-bold text-white">{instructor.name}</h3>
+            <p className="body-sm-regular text-night-muted">{instructor.headline}</p>
+            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 body-sm-medium text-night-soft">
               {stats.map((s) => (
                 <span key={s.text} className="inline-flex items-center gap-1.5">
                   <s.icon className="h-4 w-4 text-accent" />
@@ -42,7 +42,7 @@ export function InstructorBlock({ instructor }: { instructor: AcademyInstructor 
             ))}
           </div>
         )}
-        {instructor.bio && <p className="body-regular mt-5 whitespace-pre-line text-primary-400">{instructor.bio}</p>}
+        {instructor.bio && <p className="body-regular mt-5 whitespace-pre-line text-night-soft">{instructor.bio}</p>}
         {instructor.courses > 1 && (
           <Link href={`/courses?instructor=${instructor.id}`} className="mt-5 inline-flex items-center gap-1.5 body-sm-medium text-accent hover:underline">
             See all courses by {instructor.name}

@@ -18,7 +18,7 @@ export function CourseCard({ course, currency, priority }: { course: AcademyCour
     <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 400, damping: 30 }} className="h-full">
       <Link
         href={`/courses/${course.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-dash bg-white transition-shadow duration-300 hover:shadow-xl hover:shadow-primary-500/5"
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-night-line bg-night-surface transition-shadow duration-300 hover:shadow-xl hover:shadow-black/40"
       >
         <div className="relative">
           <CourseThumb src={course.thumbnail} title={course.title} priority={priority} />
@@ -44,24 +44,24 @@ export function CourseCard({ course, currency, priority }: { course: AcademyCour
               </ToneBadge>
             )}
             {course.rating > 0 && (
-              <span className="inline-flex items-center gap-1.5 body-xsm-medium text-primary-500">
+              <span className="inline-flex items-center gap-1.5 body-xsm-medium text-white">
                 <StarRating value={course.rating} size="xs" />
                 {course.rating.toFixed(1)}
-                <span className="text-primary-300">({course.reviewCount})</span>
+                <span className="text-night-muted">({course.reviewCount})</span>
               </span>
             )}
           </div>
 
-          <h3 className="heading-h5 mt-3 line-clamp-2 font-semibold text-primary-500 transition-colors group-hover:text-accent">{course.title}</h3>
-          <p className="body-sm-regular mt-1.5 line-clamp-2 text-primary-300">{course.shortDescription}</p>
+          <h3 className="heading-h5 mt-3 line-clamp-2 font-semibold text-white transition-colors group-hover:text-accent">{course.title}</h3>
+          <p className="body-sm-regular mt-1.5 line-clamp-2 text-night-muted">{course.shortDescription}</p>
 
           <div className="mt-4 flex items-center gap-2">
             <Avatar name={course.instructor.name} src={course.instructor.avatar} size="xs" />
-            <span className="body-xsm-medium truncate text-primary-400">{course.instructor.name}</span>
+            <span className="body-xsm-medium truncate text-night-soft">{course.instructor.name}</span>
           </div>
 
           <div className="mt-auto pt-4">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-dash pt-4 body-xsm-regular text-primary-300">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-night-line pt-4 body-xsm-regular text-night-muted">
               {course.lessons > 0 && (
                 <span className="inline-flex items-center gap-1.5">
                   <BookOpen className="h-3.5 w-3.5" />
@@ -80,7 +80,7 @@ export function CourseCard({ course, currency, priority }: { course: AcademyCour
                   {compact(course.students)}
                 </span>
               )}
-              <span className="ml-auto heading-h5 font-bold text-primary-500">{formatPrice(course.price, currency, course.isFree)}</span>
+              <span className="ml-auto heading-h5 font-bold text-white">{formatPrice(course.price, currency, course.isFree)}</span>
             </div>
           </div>
         </div>

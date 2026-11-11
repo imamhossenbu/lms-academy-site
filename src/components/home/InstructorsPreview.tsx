@@ -12,7 +12,7 @@ export function InstructorsPreview({ instructors }: { instructors: AcademyInstru
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-        <SectionHeading align="left" eyebrow="Instructors" title="Learn from our instructors" highlight="instructors" subtitle="The people behind our courses." className="max-w-2xl" />
+        <SectionHeading align="left" title="Our_ Instructors" subtitle="The people behind our courses." className="max-w-2xl" />
         {instructors.length > 4 && (
           <ButtonLink href="/instructors" variant="secondary" icon={<ArrowRight className="h-4 w-4" />}>
             All instructors

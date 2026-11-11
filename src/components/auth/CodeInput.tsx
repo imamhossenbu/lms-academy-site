@@ -49,8 +49,8 @@ export function CodeInput({ value, onChange, invalid, disabled }: { value: strin
             if (e.key === "ArrowRight") refs.current[i + 1]?.focus();
           }}
           className={cn(
-            "h-14 w-full min-w-0 rounded-xl border bg-white text-center heading-h3 font-bold text-primary-500 outline-none transition-all focus:border-accent focus:ring-4 focus:ring-accent-10",
-            invalid ? "border-red bg-red-14" : d ? "border-accent" : "border-dash",
+            "h-14 w-full min-w-0 rounded-xl border bg-night-surface text-center heading-h3 font-bold text-white outline-none transition-all focus:border-accent focus:ring-4 focus:ring-accent-10",
+            invalid ? "border-red bg-red-14" : d ? "border-accent" : "border-night-line",
           )}
         />
       ))}

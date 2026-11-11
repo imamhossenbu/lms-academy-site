@@ -23,14 +23,14 @@ export function CouponForm({ applied, error, attempted }: { applied: { code: str
   const fieldError = formState.errors.code?.message ?? (!applied ? error : null);
 
   return (
-    <div className="rounded-2xl border border-dash bg-white p-5">
-      <h2 className="body-medium flex items-center gap-2 font-semibold text-primary-500">
+    <div className="rounded-2xl border border-night-line bg-night-surface p-5">
+      <h2 className="body-medium flex items-center gap-2 font-semibold text-white">
         <TicketPercent className="h-4 w-4 text-accent" />
         Have a coupon?
       </h2>
       <AnimatePresence mode="wait" initial={false}>
         {applied ? (
-          <motion.div key="applied" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-green bg-green-bg px-4 py-3">
+          <motion.div key="applied" initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} className="mt-3 flex items-center justify-between gap-3 rounded-xl border border-green bg-green/15 px-4 py-3">
             <span className="flex min-w-0 items-center gap-2">
               <ToneBadge tone="green" size="sm">
                 {applied.code}
@@ -45,7 +45,7 @@ export function CouponForm({ applied, error, attempted }: { applied: { code: str
                 reset({ code: "" });
                 go(null);
               }}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-primary-400 hover:bg-white"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-night-soft hover:bg-night-raised"
               aria-label="Remove coupon"
             >
               {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <X className="h-4 w-4" />}
@@ -59,9 +59,9 @@ export function CouponForm({ applied, error, attempted }: { applied: { code: str
                 placeholder="Enter code"
                 aria-label="Coupon code"
                 aria-invalid={!!fieldError}
-                className={`h-11 min-w-0 flex-1 rounded-xl border px-4 body-sm-regular uppercase text-primary-500 outline-none transition-all placeholder:normal-case placeholder:text-primary-300 focus:border-accent focus:ring-4 focus:ring-accent-10 ${fieldError ? "border-red bg-red-14" : "border-dash bg-white"}`}
+                className={`h-11 min-w-0 flex-1 rounded-xl border px-4 body-sm-regular uppercase text-white outline-none transition-all placeholder:normal-case placeholder:text-night-muted focus:border-accent focus:ring-4 focus:ring-accent-10 ${fieldError ? "border-red bg-red-14" : "border-night-line bg-night-surface"}`}
               />
-              <motion.button type="submit" whileTap={{ scale: 0.96 }} disabled={pending} className="inline-flex h-11 shrink-0 items-center gap-2 rounded-xl border border-dash bg-white px-4 body-sm-medium text-primary-500 hover:border-primary-300 disabled:opacity-60">
+              <motion.button type="submit" whileTap={{ scale: 0.96 }} disabled={pending} className="inline-flex h-11 shrink-0 items-center gap-2 rounded-xl border border-night-line bg-night-surface px-4 body-sm-medium text-white hover:border-night-line-strong disabled:opacity-60">
                 {pending && <Loader2 className="h-4 w-4 animate-spin" />}
                 Apply
               </motion.button>

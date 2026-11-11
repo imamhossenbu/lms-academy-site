@@ -17,16 +17,16 @@ interface ButtonLinkProps {
 }
 
 const VARIANTS = {
-  primary: "bg-accent text-white hover:bg-accent-hover academy-glow-btn",
-  secondary: "bg-white text-primary-500 border border-dash hover:border-primary-300",
-  ghost: "text-primary-400 hover:text-primary-500 hover:bg-slate-100",
-  light: "bg-white text-accent hover:bg-accent-light",
-  dark: "bg-primary-500 text-white hover:bg-primary-400",
+  primary: "academy-gradient text-white academy-glow-btn",
+  secondary: "bg-transparent text-accent border border-accent hover:bg-accent-10",
+  ghost: "text-night-soft hover:text-white hover:bg-night-skeleton",
+  light: "bg-white text-night hover:bg-white/90",
+  dark: "bg-night-raised text-white border border-night-line hover:border-night-line-strong",
 };
 const SIZES = { sm: "h-9 px-3.5 body-sm-medium", md: "h-11 px-5 body-sm-medium", lg: "h-12 px-6 body-medium" };
 const MotionLink = motion.create(Link);
 
-/** A link styled as a button in the academy's accent colour. Presses in on tap; the trailing icon nudges forward on hover. */
+/** A link styled as a button: neon accent gradient (primary) or accent outline (secondary). Presses in on tap; the trailing icon nudges forward on hover. */
 export function ButtonLink({ href, children, variant = "primary", size = "md", icon, className, external }: ButtonLinkProps) {
   const filled = variant === "primary" || variant === "light" || variant === "dark";
   const cls = cn("group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl whitespace-nowrap transition-colors", VARIANTS[variant], SIZES[size], className);

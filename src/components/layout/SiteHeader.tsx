@@ -37,7 +37,7 @@ export function SiteHeader({ brand, user }: { brand: AcademyBrand; user: HeaderU
   }
 
   return (
-    <header className={cn("sticky top-0 z-40 border-b border-dash transition-[background-color,box-shadow] duration-300", scrolled ? "bg-white/80 shadow-lg shadow-primary-500/5 backdrop-blur-xl" : "bg-white")}>
+    <header className={cn("sticky top-0 z-40 border-b transition-[background-color,box-shadow,border-color] duration-300", scrolled ? "border-night-line bg-night/75 shadow-lg shadow-black/40 backdrop-blur-xl" : "border-transparent bg-night")}>
       <motion.div
         className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 sm:px-6"
         initial={false}
@@ -51,7 +51,7 @@ export function SiteHeader({ brand, user }: { brand: AcademyBrand; user: HeaderU
             <UserMenu user={user} />
           ) : (
             <>
-              <ButtonLink href={`/login?next=${encodeURIComponent(pathname)}`} variant="ghost" className="text-primary-500">
+              <ButtonLink href={`/login?next=${encodeURIComponent(pathname)}`} variant="ghost" className="text-white">
                 Sign in
               </ButtonLink>
               <ButtonLink href={`/signup?next=${encodeURIComponent(pathname)}`} icon={<ArrowRight className="h-4 w-4" />}>
@@ -64,7 +64,7 @@ export function SiteHeader({ brand, user }: { brand: AcademyBrand; user: HeaderU
           type="button"
           whileTap={{ scale: 0.92 }}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-dash bg-white text-primary-500 lg:hidden"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-night-line bg-white/5 text-white lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >

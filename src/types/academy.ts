@@ -32,6 +32,13 @@ export interface AcademyProfile {
   maintenance: { enabled: boolean; message: string; until: string };
   stats: { courses: number; students: number; instructors: number; lessons: number; rating: number; reviews: number };
   categories: AcademyCategory[];
+  /** Home-page content the admin fills in (Mission, mobile app). Absent / null until set up — the sections stay hidden. */
+  site?: AcademySiteContent | null;
+}
+
+export interface AcademySiteContent {
+  mission?: { why: string; what: string; how: string; imageUrl: string } | null;
+  app?: { title: string; text: string; appStoreUrl: string; playStoreUrl: string; screenshotUrl: string } | null;
 }
 
 export interface AcademyInstructorSummary {

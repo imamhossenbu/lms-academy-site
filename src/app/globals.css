@@ -101,7 +101,7 @@
 html,
 body {
   font-family: var(--font-sans);
-  background-color: #FFFFFF !important;
+  background-color: #0B0614 !important;
   color: var(--dash-text);
   margin: 0;
   padding: 0;
@@ -110,10 +110,13 @@ body {
   overflow-x: clip;
 }
 
-*,
-::before,
-::after {
-  border-color: #E2E8F0;
+/* In the base layer so Tailwind's border-color utilities (border-accent, border-night-line…) win. */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: rgba(255, 255, 255, 0.09);
+  }
 }
 
 /* ==========================================
@@ -1006,67 +1009,101 @@ body {
   }
 }
 
-/* ---------------------------------------------------------------- academy accent */
+/* ---------------------------------------------------------------- academy theme (dark neon) */
 /*
- * Each academy picks its accent in the admin panel (Settings › Branding). The root layout sets
- * <html data-accent="…">; these tokens follow it, so use `bg-accent`, `text-accent`, `border-accent`,
- * `bg-accent-light`, `bg-accent-soft`, `bg-accent-10`, `bg-accent-20`, `hover:bg-accent-hover`, `academy-glow-btn`.
+ * Academy sites use a dark "night" canvas with neon glows in the academy's accent (Settings › Branding).
+ * The root layout sets <html data-accent="…">; every accent token follows it.
+ *   Surfaces: bg-night (page) · bg-night-surface (cards) · bg-night-raised (inputs, alt sections) · bg-night-deep (footer)
+ *   Lines / text: border-night-line · divide-night-line · text-night-soft (body) · text-night-muted (secondary)
+ *   Skeletons: bg-night-skeleton · bg-night-skeleton-strong
+ *   Accent: bg-accent · text-accent · border-accent · bg-accent-light (tinted tile) · bg-accent-soft (faint wash)
+ *           bg-accent-10 / bg-accent-20 · hover:bg-accent-hover · accent-2 = second gradient stop
+ *   Effects: academy-gradient (accent → accent-2 fill) · academy-gradient-text · academy-glow-btn · academy-neon (icon glow)
  */
 @theme inline {
+  --color-night: #0B0614;
+  --color-night-deep: #07040D;
+  --color-night-surface: #140D22;
+  --color-night-raised: #1B1230;
+  --color-night-line: rgba(255, 255, 255, 0.09);
+  --color-night-line-strong: rgba(255, 255, 255, 0.22);
+  --color-night-soft: rgba(255, 255, 255, 0.78);
+  --color-night-muted: rgba(255, 255, 255, 0.55);
+  --color-night-skeleton: rgba(255, 255, 255, 0.06);
+  --color-night-skeleton-strong: rgba(255, 255, 255, 0.11);
+
+  /* Success-story card tints (fixed, independent of the accent). */
+  --color-story-amber: #5A2D12;
+  --color-story-amber-deep: #2A1408;
+  --color-story-indigo: #2B1A78;
+  --color-story-indigo-deep: #120A33;
+  --color-story-teal: #0F4C4A;
+  --color-story-teal-deep: #08221F;
+  --color-story-violet: #5B1670;
+  --color-story-violet-deep: #22082C;
+
   --color-accent: var(--academy-accent);
+  --color-accent-2: var(--academy-accent-2);
   --color-accent-hover: var(--academy-accent-hover);
-  --color-accent-light: var(--academy-accent-light);
-  --color-accent-soft: var(--academy-accent-soft);
+  --color-accent-light: color-mix(in srgb, var(--academy-accent) 16%, #140D22);
+  --color-accent-soft: color-mix(in srgb, var(--academy-accent) 7%, #0B0614);
   --color-accent-10: color-mix(in srgb, var(--academy-accent) 10%, transparent);
-  --color-accent-20: color-mix(in srgb, var(--academy-accent) 20%, transparent);
+  --color-accent-20: color-mix(in srgb, var(--academy-accent) 22%, transparent);
   --color-accent-ink: var(--academy-accent-ink);
 }
 :root {
-  --academy-accent: #FF5B00;
-  --academy-accent-hover: #EA5200;
-  --academy-accent-light: #FFF4ED;
-  --academy-accent-soft: #FFF9F5;
-  --academy-accent-ink: #0B101B;
+  color-scheme: dark;
+  --academy-accent: #FF6A1A;
+  --academy-accent-2: #FF2E8A;
+  --academy-accent-hover: #FF7F3A;
+  --academy-accent-ink: #0B0614;
 }
 :root[data-accent="blue"] {
-  --academy-accent: #2570FC;
-  --academy-accent-hover: #1D5FDB;
-  --academy-accent-light: #EEF4FF;
-  --academy-accent-soft: #F6F9FF;
-  --academy-accent-ink: #0A1A3A;
+  --academy-accent: #3B82F6;
+  --academy-accent-2: #8B5CF6;
+  --academy-accent-hover: #60A5FA;
 }
 :root[data-accent="green"] {
-  --academy-accent: #059669;
-  --academy-accent-hover: #047857;
-  --academy-accent-light: #ECFDF5;
-  --academy-accent-soft: #F5FEFA;
-  --academy-accent-ink: #052E22;
+  --academy-accent: #10B981;
+  --academy-accent-2: #06B6D4;
+  --academy-accent-hover: #34D399;
 }
 :root[data-accent="purple"] {
-  --academy-accent: #7C3AED;
-  --academy-accent-hover: #6D28D9;
-  --academy-accent-light: #F5F0FF;
-  --academy-accent-soft: #FAF7FF;
-  --academy-accent-ink: #1E0B47;
+  --academy-accent: #D63AF9;
+  --academy-accent-2: #7C3AED;
+  --academy-accent-hover: #E066FF;
 }
 :root[data-accent="navy"] {
-  --academy-accent: #1E3A8A;
-  --academy-accent-hover: #172E6E;
-  --academy-accent-light: #EEF2FB;
-  --academy-accent-soft: #F7F9FD;
-  --academy-accent-ink: #0B1433;
+  --academy-accent: #6366F1;
+  --academy-accent-2: #2563EB;
+  --academy-accent-hover: #818CF8;
+}
+.academy-gradient {
+  background-image: linear-gradient(100deg, var(--academy-accent), var(--academy-accent-2));
+}
+.academy-gradient-text {
+  background-image: linear-gradient(100deg, var(--academy-accent), var(--academy-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .academy-glow-btn {
-  box-shadow: 0 4px 18px color-mix(in srgb, var(--academy-accent) 32%, transparent);
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--academy-accent) 45%, transparent);
 }
 .academy-glow-btn:hover {
-  box-shadow: 0 6px 24px color-mix(in srgb, var(--academy-accent) 45%, transparent);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--academy-accent) 65%, transparent);
+}
+.academy-neon {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--academy-accent) 80%, transparent)) drop-shadow(0 0 22px color-mix(in srgb, var(--academy-accent-2) 45%, transparent));
+}
+.academy-card-glow {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 24px 60px -20px color-mix(in srgb, var(--academy-accent) 45%, transparent);
 }
 
 /* Course description (sanitised rich text from the course builder). */
-.academy-prose { color: #334155; font-size: 16px; line-height: 170%; }
+.academy-prose { color: rgba(255, 255, 255, 0.78); font-size: 16px; line-height: 170%; }
 .academy-prose > * + * { margin-top: 0.9em; }
-.academy-prose h2, .academy-prose h3, .academy-prose h4 { color: #0F172A; font-weight: 700; line-height: 130%; margin-top: 1.4em; }
+.academy-prose h2, .academy-prose h3, .academy-prose h4 { color: #FFFFFF; font-weight: 700; line-height: 130%; margin-top: 1.4em; }
 .academy-prose h2 { font-size: 22px; }
 .academy-prose h3 { font-size: 19px; }
 .academy-prose h4 { font-size: 17px; }
@@ -1074,7 +1111,7 @@ body {
 .academy-prose ol { list-style: decimal; padding-left: 1.3em; }
 .academy-prose li + li { margin-top: 0.35em; }
 .academy-prose a { color: var(--academy-accent); text-decoration: underline; text-underline-offset: 2px; }
-.academy-prose blockquote { border-left: 3px solid var(--academy-accent); padding-left: 1em; color: #64748B; }
-.academy-prose code { background: #F1F5F9; border-radius: 6px; padding: 0.1em 0.35em; font-size: 0.9em; }
-.academy-prose pre { background: #0F172A; color: #E2E8F0; border-radius: 12px; padding: 1em; overflow-x: auto; }
-.academy-prose strong, .academy-prose b { color: #0F172A; font-weight: 600; }
+.academy-prose blockquote { border-left: 3px solid var(--academy-accent); padding-left: 1em; color: rgba(255, 255, 255, 0.55); }
+.academy-prose code { background: rgba(255, 255, 255, 0.08); border-radius: 6px; padding: 0.1em 0.35em; font-size: 0.9em; }
+.academy-prose pre { background: #07040D; color: #E2E8F0; border-radius: 12px; padding: 1em; overflow-x: auto; }
+.academy-prose strong, .academy-prose b { color: #FFFFFF; font-weight: 600; }

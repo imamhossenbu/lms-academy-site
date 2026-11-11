@@ -7,9 +7,9 @@ import { CourseGrid } from "@/components/course/CourseGrid";
 export function RelatedCourses({ courses, currency }: { courses: AcademyCourseCard[]; currency: AcademyCurrency }) {
   if (courses.length === 0) return null;
   return (
-    <section className="bg-gray-bg/60">
+    <section className="bg-night-surface/40">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <SectionHeading align="left" eyebrow="Keep learning" title="You might also like" highlight="also like" />
+        <SectionHeading align="left" eyebrow="Keep learning" title="You might_ also like" />
         <CourseGrid courses={courses} currency={currency} className="mt-10" />
       </div>
     </section>

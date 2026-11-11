@@ -41,12 +41,12 @@ export function OrderSummary({ quote }: { quote: CheckoutQuote }) {
   };
 
   return (
-    <div className="rounded-3xl border border-dash bg-white p-6 shadow-2xl shadow-primary-500/5">
-      <h2 className="heading-h5 font-semibold text-primary-500">Order summary</h2>
+    <div className="rounded-3xl border border-night-line bg-night-surface p-6 shadow-2xl shadow-black/40">
+      <h2 className="heading-h5 font-semibold text-white">Order summary</h2>
       <dl className="mt-5 space-y-3 body-sm-regular">
         <div className="flex justify-between gap-3">
-          <dt className="text-primary-400">Course price</dt>
-          <dd className="font-medium text-primary-500">{quote.course.isFree ? "Free" : money(quote.price)}</dd>
+          <dt className="text-night-soft">Course price</dt>
+          <dd className="font-medium text-white">{quote.course.isFree ? "Free" : money(quote.price)}</dd>
         </div>
         <AnimatePresence initial={false}>
           {quote.discount > 0 && (
@@ -56,15 +56,15 @@ export function OrderSummary({ quote }: { quote: CheckoutQuote }) {
             </motion.div>
           )}
         </AnimatePresence>
-        <div className="flex items-end justify-between gap-3 border-t border-dash pt-4">
-          <dt className="body-medium font-semibold text-primary-500">Total</dt>
-          <dd className="heading-h2-bold text-primary-500">{free ? "Free" : money(quote.total)}</dd>
+        <div className="flex items-end justify-between gap-3 border-t border-night-line pt-4">
+          <dt className="body-medium font-semibold text-white">Total</dt>
+          <dd className="heading-h2-bold text-white">{free ? "Free" : money(quote.total)}</dd>
         </div>
       </dl>
       <SubmitButton type="button" onClick={pay} loading={busy} loadingText={free ? "Enrolling…" : "Opening payment…"} className="mt-6" icon={free ? undefined : <Lock className="h-4 w-4" />}>
         {free ? "Enroll now" : `Pay ${money(quote.total)}`}
       </SubmitButton>
-      <p className="body-xsm-regular mt-3 text-center text-primary-300">{free ? "You'll get access straight away." : "You'll get access as soon as the payment is confirmed."}</p>
+      <p className="body-xsm-regular mt-3 text-center text-night-muted">{free ? "You'll get access straight away." : "You'll get access as soon as the payment is confirmed."}</p>
     </div>
   );
 }

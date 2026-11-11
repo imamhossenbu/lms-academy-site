@@ -7,7 +7,7 @@ export function DetailSection({ id, title, aside, children }: { id?: string; tit
     <Reveal>
       <section id={id} className="scroll-mt-24">
         <div className="mb-5 flex flex-wrap items-end justify-between gap-2">
-          <h2 className="heading-h3 font-bold text-primary-500">{title}</h2>
+          <h2 className="heading-h3 font-bold text-white">{title}</h2>
           {aside}
         </div>
         {children}

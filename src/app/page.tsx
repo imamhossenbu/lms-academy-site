@@ -1,27 +1,30 @@
 import { fetchCourses, fetchInstructors, fetchReviews } from "@/lib/api";
+import { getSession } from "@/lib/session";
 import { requireAcademy } from "@/lib/tenant";
 import { HomeHero } from "@/components/home/HomeHero";
+import { CourseShowcase } from "@/components/home/CourseShowcase";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
-import { FeaturedCourses } from "@/components/home/FeaturedCourses";
-import { WhyLearn } from "@/components/home/WhyLearn";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { InstructorsPreview } from "@/components/home/InstructorsPreview";
+import { StatsGlobe } from "@/components/home/StatsGlobe";
 import { StudentReviews } from "@/components/home/StudentReviews";
+import { InstructorsPreview } from "@/components/home/InstructorsPreview";
+import { MissionSection } from "@/components/home/MissionSection";
 import { FinalCta } from "@/components/home/FinalCta";
 
 export default async function HomePage() {
   const academy = await requireAcademy();
-  const [popular, instructors, reviews] = await Promise.all([fetchCourses(academy.slug, { sort: "popular", limit: 6 }), fetchInstructors(academy.slug), fetchReviews(academy.slug, 6)]);
+  const [popular, instructors, reviews, session] = await Promise.all([fetchCourses(academy.slug, { sort: "popular", limit: 4 }), fetchInstructors(academy.slug), fetchReviews(academy.slug, 8), getSession()]);
 
   return (
     <>
-      <HomeHero academy={academy} courses={popular.data} currency={academy.currency} />
+      <HomeHero academy={academy} signedIn={!!session} />
+      <CourseShowcase courses={popular.data} total={popular.pagination.total} currency={academy.currency} />
       <CategoryGrid categories={academy.categories} />
-      <FeaturedCourses courses={popular.data} total={popular.pagination.total} currency={academy.currency} />
-      <WhyLearn academyName={academy.name} />
       <HowItWorks />
-      <InstructorsPreview instructors={instructors} />
+      <StatsGlobe academy={academy} />
       <StudentReviews reviews={reviews} rating={academy.stats.rating} total={academy.stats.reviews} />
+      <InstructorsPreview instructors={instructors} />
+      <MissionSection mission={academy.site?.mission} />
       <FinalCta academyName={academy.name} />
     </>
   );

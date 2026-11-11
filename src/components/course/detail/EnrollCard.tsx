@@ -3,17 +3,19 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { ArrowRight, Award, BookOpen, ClipboardCheck, Clock, FileQuestion, Link2, MonitorSmartphone, Video } from "lucide-react";
+import { ArrowRight, Award, BadgeCheck, BookOpen, ClipboardCheck, Clock, FileQuestion, Link2, MonitorSmartphone, Video } from "lucide-react";
 import { formatDuration, formatPrice, plural } from "@/lib/format";
 import type { AcademyCourseDetail, AcademyCurrency } from "@/types/academy";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import { ToneBadge } from "@/components/ui/ToneBadge";
 import { CourseThumb } from "@/components/course/CourseThumb";
 
 /**
- * Sticky purchase card: cover, price, enrol button and what's included. Until online checkout ships, "Enroll now"
- * goes to the contact page with this course pre-selected.
+ * Sticky purchase card: cover, price, enrol button and what's included. Visitors sign up first and come back to the
+ * checkout; enrolled learners see "You're enrolled" and a link to their courses.
  */
-export function EnrollCard({ course, currency }: { course: AcademyCourseDetail; currency: AcademyCurrency }) {
+export function EnrollCard({ course, currency, signedIn, enrolled }: { course: AcademyCourseDetail; currency: AcademyCurrency; signedIn: boolean; enrolled: boolean }) {
+  const checkoutPath = `/checkout/${course.slug}`;
   const t = course.lessonTypes;
   const includes = [
     course.lessons > 0 && { icon: BookOpen, text: plural(course.lessons, "lesson") },
@@ -45,10 +47,23 @@ export function EnrollCard({ course, currency }: { course: AcademyCourseDetail; 
     >
       <CourseThumb src={course.thumbnail} title={course.title} priority sizes="380px" />
       <div className="p-6">
-        <p className="heading-h1-bold text-primary-500">{formatPrice(course.price, currency, course.isFree)}</p>
-        <ButtonLink href={`/contact?course=${encodeURIComponent(course.slug)}`} size="lg" className="mt-5 w-full" icon={<ArrowRight className="h-4 w-4" />}>
-          {course.isFree ? "Join for free" : "Enroll now"}
-        </ButtonLink>
+        {enrolled ? (
+          <>
+            <ToneBadge tone="green" size="lg" icon={<BadgeCheck className="h-4 w-4" />}>
+              You&apos;re enrolled
+            </ToneBadge>
+            <ButtonLink href="/my-courses" size="lg" className="mt-5 w-full" icon={<ArrowRight className="h-4 w-4" />}>
+              Go to my courses
+            </ButtonLink>
+          </>
+        ) : (
+          <>
+            <p className="heading-h1-bold text-primary-500">{formatPrice(course.price, currency, course.isFree)}</p>
+            <ButtonLink href={signedIn ? checkoutPath : `/signup?next=${encodeURIComponent(checkoutPath)}`} size="lg" className="mt-5 w-full" icon={<ArrowRight className="h-4 w-4" />}>
+              {course.isFree ? "Enroll for free" : "Enroll now"}
+            </ButtonLink>
+          </>
+        )}
         <motion.button type="button" whileTap={{ scale: 0.97 }} onClick={share} className="mt-2.5 flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-dash body-sm-medium text-primary-500 transition-colors hover:border-primary-300">
           <Link2 className="h-4 w-4" />
           Share course

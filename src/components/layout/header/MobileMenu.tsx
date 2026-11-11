@@ -4,13 +4,14 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { NAV_LINKS, isActive } from "@/lib/nav";
 import { ButtonLink } from "@/components/ui/ButtonLink";
+import type { HeaderUser } from "./UserMenu";
 
 /** Slide-down menu for small screens. */
-export function MobileMenu({ onClose }: { onClose: () => void }) {
+export function MobileMenu({ onClose, user }: { onClose: () => void; user: HeaderUser | null }) {
   const pathname = usePathname();
   return (
     <motion.nav initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.22 }} className="overflow-hidden lg:hidden" aria-label="Mobile">
@@ -22,10 +23,21 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
             </Link>
           </motion.div>
         ))}
-        <div className="pt-3">
-          <ButtonLink href="/courses" className="w-full" icon={<ArrowRight className="h-4 w-4" />}>
-            Browse courses
-          </ButtonLink>
+        <div className="grid grid-cols-2 gap-2 pt-3">
+          {user ? (
+            <ButtonLink href="/my-courses" className="col-span-2" icon={<BookOpen className="h-4 w-4" />}>
+              My courses
+            </ButtonLink>
+          ) : (
+            <>
+              <ButtonLink href={`/login?next=${encodeURIComponent(pathname)}`} variant="secondary">
+                Sign in
+              </ButtonLink>
+              <ButtonLink href={`/signup?next=${encodeURIComponent(pathname)}`} icon={<ArrowRight className="h-4 w-4" />}>
+                Get started
+              </ButtonLink>
+            </>
+          )}
         </div>
       </div>
     </motion.nav>

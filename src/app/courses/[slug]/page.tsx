@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { fetchCourse } from "@/lib/api";
+import { fetchAccess } from "@/lib/learner";
+import { getSession } from "@/lib/session";
 import { getAcademy, requireAcademy } from "@/lib/tenant";
 import { CourseHeader } from "@/components/course/detail/CourseHeader";
 import { EnrollCard } from "@/components/course/detail/EnrollCard";
@@ -29,6 +31,8 @@ export default async function CoursePage({ params }: Props) {
   const academy = await requireAcademy();
   const course = await fetchCourse(academy.slug, (await params).slug);
   if (!course) notFound();
+  const session = await getSession();
+  const enrolled = session ? await fetchAccess(course.slug) : false;
 
   return (
     <>
@@ -43,7 +47,7 @@ export default async function CoursePage({ params }: Props) {
         </div>
         <div className="order-1 -mt-6 lg:order-2 lg:-mt-72">
           <div className="lg:sticky lg:top-24">
-            <EnrollCard course={course} currency={academy.currency} />
+            <EnrollCard course={course} currency={academy.currency} signedIn={!!session} enrolled={enrolled} />
           </div>
         </div>
       </div>

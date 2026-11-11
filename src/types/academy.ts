@@ -110,3 +110,36 @@ export interface AcademyPage<T> {
   data: T[];
   pagination: { total: number; page: number; limit: number; totalPages: number };
 }
+
+// ---------------------------------------------------------------- signed-in learner (/academy/:slug/me/*)
+
+export interface CheckoutQuote {
+  course: { id: string; slug: string; title: string; thumbnail: string | null; instructor: string; level: string; isFree: boolean };
+  currency: AcademyCurrency;
+  price: number;
+  discount: number;
+  total: number;
+  coupon: { code: string; label: string } | null;
+  couponError: string | null;
+  enrolled: boolean;
+}
+
+export interface CheckoutResult {
+  orderId: string;
+  orderNumber: string;
+  status: "PAID" | "PENDING" | "FAILED" | "CANCELLED" | "REFUNDED";
+  total: number;
+  currency: AcademyCurrency;
+  paidAt: string | null;
+  method: string | null;
+  course: { slug: string; title: string; thumbnail: string | null };
+}
+
+export interface MyCourse {
+  course: { slug: string; title: string; thumbnail: string | null; level: string; available: boolean; instructor: { name: string; avatar: string | null } };
+  lessons: number;
+  progress: number;
+  completedAt: string | null;
+  enrolledAt: string;
+  lastAccessedAt: string | null;
+}

@@ -15,10 +15,9 @@ interface Card {
 }
 
 /** One card per contact channel the academy has filled in (Settings › General). */
-export function ContactCards({ email, phone, address, website, courseTitle }: { email: string; phone: string; address: string; website: string; courseTitle?: string }) {
-  const subject = courseTitle ? `?subject=${encodeURIComponent(`Enrolling in ${courseTitle}`)}` : "";
+export function ContactCards({ email, phone, address, website }: { email: string; phone: string; address: string; website: string }) {
   const cards = [
-    email && { icon: Mail, title: "Email", value: email, href: `mailto:${email}${subject}`, hint: "We usually reply within a working day." },
+    email && { icon: Mail, title: "Email", value: email, href: `mailto:${email}`, hint: "We usually reply within a working day." },
     phone && { icon: Phone, title: "Phone", value: phone, href: `tel:${phone.replace(/\s+/g, "")}`, hint: "Call or message us during office hours." },
     address && { icon: MapPin, title: "Visit us", value: address, hint: "Drop by our office." },
     website && { icon: Globe, title: "Website", value: website.replace(/^https?:\/\//, ""), href: /^https?:\/\//.test(website) ? website : `https://${website}`, hint: "More about us." },

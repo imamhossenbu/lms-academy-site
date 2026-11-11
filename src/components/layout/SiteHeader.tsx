@@ -9,12 +9,13 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { AcademyLogo, type AcademyBrand } from "./AcademyLogo";
 import { DesktopNav } from "./header/DesktopNav";
 import { MobileMenu } from "./header/MobileMenu";
+import { UserMenu, type HeaderUser } from "./header/UserMenu";
 
 /**
- * Sticky full-width header: academy logo, nav (accent colour for the current page), "Browse courses".
+ * Sticky full-width header: academy logo, nav (accent colour for the current page), Sign in / Sign up or the learner's menu.
  * Turns compact and glassy once you scroll; a thin accent line along the bottom shows reading progress.
  */
-export function SiteHeader({ brand }: { brand: AcademyBrand }) {
+export function SiteHeader({ brand, user }: { brand: AcademyBrand; user: HeaderUser | null }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -45,10 +46,19 @@ export function SiteHeader({ brand }: { brand: AcademyBrand }) {
       >
         <AcademyLogo brand={brand} />
         <DesktopNav />
-        <div className="hidden lg:block">
-          <ButtonLink href="/courses" icon={<ArrowRight className="h-4 w-4" />}>
-            Browse courses
-          </ButtonLink>
+        <div className="hidden items-center gap-2 lg:flex">
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <>
+              <ButtonLink href={`/login?next=${encodeURIComponent(pathname)}`} variant="ghost" className="text-primary-500">
+                Sign in
+              </ButtonLink>
+              <ButtonLink href={`/signup?next=${encodeURIComponent(pathname)}`} icon={<ArrowRight className="h-4 w-4" />}>
+                Get started
+              </ButtonLink>
+            </>
+          )}
         </div>
         <motion.button
           type="button"
@@ -67,7 +77,7 @@ export function SiteHeader({ brand }: { brand: AcademyBrand }) {
       </motion.div>
 
       <div className="mx-auto max-w-7xl px-3 sm:px-5">
-        <AnimatePresence>{open && <MobileMenu onClose={() => setOpen(false)} />}</AnimatePresence>
+        <AnimatePresence>{open && <MobileMenu onClose={() => setOpen(false)} user={user} />}</AnimatePresence>
       </div>
 
       <motion.span className="absolute inset-x-0 -bottom-px h-0.5 origin-left bg-gradient-to-r from-accent-20 via-accent to-accent-hover" style={{ scaleX: progress }} aria-hidden />

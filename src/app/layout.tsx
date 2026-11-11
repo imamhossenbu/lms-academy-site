@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
+import { getSession } from "@/lib/session";
 import { getAcademy } from "@/lib/tenant";
 import type { AcademyProfile } from "@/types/academy";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -46,6 +47,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const academy = await loadAcademy();
   const ok = academy && academy !== "error" && academy.available ? academy : null;
   const accent = academy && academy !== "error" ? academy.branding.accent : "orange";
+  const session = ok ? await getSession() : null;
 
   return (
     <html lang="en" className={aeonik.variable} data-accent={accent}>
@@ -59,12 +61,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         ) : (
           <>
             {ok.maintenance.enabled && <MaintenanceBar message={ok.maintenance.message} until={ok.maintenance.until} />}
-            <SiteHeader brand={{ name: ok.name, initials: ok.logoInitials, logoUrl: ok.branding.logoUrl, logoDarkUrl: ok.branding.logoDarkUrl }} />
+            <SiteHeader brand={{ name: ok.name, initials: ok.logoInitials, logoUrl: ok.branding.logoUrl, logoDarkUrl: ok.branding.logoDarkUrl }} user={session ? { name: session.user.name, email: session.user.email, avatar: session.user.avatar } : null} />
             <main>{children}</main>
             <SiteFooter academy={ok} />
           </>
         )}
-        <Toaster position="top-right" richColors />
+        <Toaster position="top-right" richColors offset={{ top: 88, right: 16 }} mobileOffset={{ top: 80 }} />
       </body>
     </html>
   );

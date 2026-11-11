@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -39,7 +40,14 @@ export function LoginForm({ next }: { next: string }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
       <InputField id="login-email" type="email" autoComplete="email" label="Email" placeholder="you@example.com" leftElement={<Mail className="h-4 w-4" />} error={formState.errors.email?.message} {...register("email")} />
-      <PasswordField id="login-password" autoComplete="current-password" label="Password" placeholder="Your password" error={formState.errors.password?.message} {...register("password")} />
+      <div>
+        <PasswordField id="login-password" autoComplete="current-password" label="Password" placeholder="Your password" error={formState.errors.password?.message} {...register("password")} />
+        <div className="mt-2 text-right">
+          <Link href="/forgot-password" className="body-sm-medium text-accent hover:underline">
+            Forgot password?
+          </Link>
+        </div>
+      </div>
       <SubmitButton loading={formState.isSubmitting} loadingText="Signing in…" icon={<ArrowRight className="h-4 w-4" />}>
         Sign in
       </SubmitButton>

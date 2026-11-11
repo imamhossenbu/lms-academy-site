@@ -3,7 +3,7 @@ import { backend } from "@/lib/server/backend";
 import { cookieOptions, TOKEN_COOKIE, USER_COOKIE } from "@/lib/session";
 import { getAcademySlug } from "@/lib/tenant";
 
-const ACTIONS = new Set(["login", "register", "verify", "resend"]);
+const ACTIONS = new Set(["login", "register", "verify", "resend", "forgot", "reset"]);
 
 /** Proxies learner auth to the backend; a successful login / verify stores the session in httpOnly cookies. */
 export async function POST(req: NextRequest, ctx: { params: Promise<{ action: string }> }) {

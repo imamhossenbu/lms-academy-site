@@ -52,8 +52,8 @@ export function EnrollCard({ course, currency, signedIn, enrolled }: { course: A
             <ToneBadge tone="green" size="lg" icon={<BadgeCheck className="h-4 w-4" />}>
               You&apos;re enrolled
             </ToneBadge>
-            <ButtonLink href="/my-courses" size="lg" className="mt-5 w-full" icon={<ArrowRight className="h-4 w-4" />}>
-              Go to my courses
+            <ButtonLink href={`/learn/${course.slug}`} size="lg" className="mt-5 w-full" icon={<ArrowRight className="h-4 w-4" />}>
+              Continue learning
             </ButtonLink>
           </>
         ) : (

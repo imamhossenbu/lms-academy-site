@@ -16,7 +16,7 @@ export function MyCourseCard({ item }: { item: MyCourse }) {
   const status = done ? { tone: "green" as const, label: "Completed" } : item.progress > 0 ? { tone: "accent" as const, label: "In progress" } : { tone: "gray" as const, label: "Not started" };
   return (
     <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 400, damping: 30 }} className="h-full">
-      <Link href={`/courses/${item.course.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-night-line bg-night-surface transition-shadow hover:shadow-xl hover:shadow-black/40">
+      <Link href={`/learn/${item.course.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-night-line bg-night-surface transition-shadow hover:shadow-xl hover:shadow-black/40">
         <div className="relative">
           <CourseThumb src={item.course.thumbnail} title={item.course.title} />
           <ToneBadge tone={status.tone} size="sm" variant="pill" className="absolute left-3 top-3" dot>

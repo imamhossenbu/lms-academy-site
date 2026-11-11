@@ -155,3 +155,73 @@ export interface MyCourse {
   enrolledAt: string;
   lastAccessedAt: string | null;
 }
+
+// ---------------------------------------------------------------- course player (/learn)
+
+export interface PlayerLesson {
+  id: string;
+  title: string;
+  type: string;
+  durationMinutes: number;
+  isPreview: boolean;
+  completed: boolean;
+  /** null = open; otherwise why it's locked. */
+  lockedReason: string | null;
+}
+
+export interface PlayerOutline {
+  course: { slug: string; title: string; thumbnail: string | null; instructor: { name: string; avatar: string | null; headline: string | null } };
+  progress: number;
+  completedLessons: number;
+  totalLessons: number;
+  completedAt: string | null;
+  nextLessonId: string | null;
+  modules: { id: string; title: string; lessons: PlayerLesson[] }[];
+}
+
+export interface LessonResource {
+  id: string;
+  title: string;
+  fileUrl: string;
+  fileType: string;
+  size: string;
+  description: string;
+  isDownloadable: boolean;
+}
+
+export interface LessonDetail {
+  id: string;
+  title: string;
+  type: string;
+  content: string | null;
+  videoUrl: string | null;
+  durationMinutes: number;
+  resources: LessonResource[];
+  completed: boolean;
+  lastPosition: number;
+  quizId: string | null;
+}
+
+export type QuizKind = "MULTIPLE_CHOICE" | "MULTIPLE_SELECT" | "TRUE_FALSE" | "SHORT_ANSWER";
+
+export interface StudentQuiz {
+  id: string;
+  title: string;
+  descriptionHtml: string;
+  instructionsHtml: string;
+  totalMarks: number;
+  passingMarks: number;
+  timeLimitMinutes: number | null;
+  maxAttempts: number | null;
+  questions: { id: string; kind: QuizKind; questionHtml: string; options: { id: string; text: string }[]; points: number; required: boolean }[];
+}
+
+export interface QuizSubmitResult {
+  id: string;
+  attemptNumber: number;
+  score?: number;
+  totalMarks?: number;
+  percentage?: number;
+  passed?: boolean;
+  questions?: { questionId: string; correct: boolean; correctOptionIds?: string[]; acceptedAnswers?: string[]; explanationHtml?: string }[];
+}

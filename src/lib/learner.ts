@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import type { CheckoutQuote, CheckoutResult, MyCourse } from "@/types/academy";
+import type { CheckoutQuote, CheckoutResult, LessonDetail, MyCourse, PlayerOutline } from "@/types/academy";
 import { backend } from "./server/backend";
 import { getSession } from "./session";
 import { getAcademySlug } from "./tenant";
@@ -28,3 +28,6 @@ export async function fetchAccess(courseSlug: string) {
 export const fetchQuote = (courseSlug: string, coupon?: string) => me<CheckoutQuote>(`/checkout/${encodeURIComponent(courseSlug)}${coupon ? `?coupon=${encodeURIComponent(coupon)}` : ""}`);
 export const fetchOrderResult = (orderId: string) => me<CheckoutResult>(`/orders/${encodeURIComponent(orderId)}`);
 export const fetchMyCourses = () => me<MyCourse[]>("/courses");
+
+export const fetchOutline = (courseSlug: string) => me<PlayerOutline>(`/learn/${encodeURIComponent(courseSlug)}`);
+export const fetchLesson = (courseSlug: string, lessonId: string) => me<LessonDetail>(`/learn/${encodeURIComponent(courseSlug)}/lessons/${encodeURIComponent(lessonId)}`);

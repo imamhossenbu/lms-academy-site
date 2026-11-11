@@ -7,6 +7,7 @@ import type { AcademyProfile } from "@/types/academy";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { MaintenanceBar } from "@/components/layout/MaintenanceBar";
+import { FooterGate } from "@/components/layout/FooterGate";
 import { AcademyUnavailable, NoAcademy, ServiceDown } from "@/components/states/AcademyStates";
 import "./globals.css";
 
@@ -63,7 +64,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             {ok.maintenance.enabled && <MaintenanceBar message={ok.maintenance.message} until={ok.maintenance.until} />}
             <SiteHeader brand={{ name: ok.name, initials: ok.logoInitials, logoUrl: ok.branding.logoUrl, logoDarkUrl: ok.branding.logoDarkUrl }} user={session ? { name: session.user.name, email: session.user.email, avatar: session.user.avatar } : null} />
             <main>{children}</main>
-            <SiteFooter academy={ok} />
+            <FooterGate>
+              <SiteFooter academy={ok} />
+            </FooterGate>
           </>
         )}
         <Toaster position="top-right" richColors offset={{ top: 88, right: 16 }} mobileOffset={{ top: 80 }} />

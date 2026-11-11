@@ -70,7 +70,7 @@ export function ResultView({ status, course, order }: Props) {
       </div>
 
       <div className="mt-8 flex flex-wrap justify-center gap-3">
-        {success && <ButtonLink href="/my-courses">Go to my courses</ButtonLink>}
+        {success && <ButtonLink href={`/learn/${course.slug}`}>Start learning</ButtonLink>}
         {retry && <ButtonLink href={`/checkout/${course.slug}`}>Try again</ButtonLink>}
         {status === "PENDING" && (
           <motion.button type="button" whileTap={{ scale: 0.96 }} onClick={() => router.refresh()} className="inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-5 body-sm-medium text-white academy-glow-btn">

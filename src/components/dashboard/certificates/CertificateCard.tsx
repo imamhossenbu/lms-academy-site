@@ -7,8 +7,31 @@ import { Award, Copy, Download, ShieldCheck } from "lucide-react";
 import type { CertificateItem } from "@/types/academy";
 import { ToneBadge } from "@/components/ui/ToneBadge";
 
-/** A certificate: course, number, issue date, status; verify link, copy link, download (when the PDF exists). */
+/** A certificate: course, number, issue date, status; verify link, copy link, PDF download (rendered on demand). */
 export function CertificateCard({ c }: { c: CertificateItem }) {
+  const [downloading, setDownloading] = React.useState(false);
+  const download = async () => {
+    setDownloading(true);
+    const toastId = toast.loading("Preparing your certificate…", { description: c.course.title });
+    try {
+      const res = await fetch(`/api/me/certificates/${c.id}/pdf`);
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { message?: string } | null;
+        throw new Error(data?.message || "Please try again in a moment.");
+      }
+      const url = URL.createObjectURL(await res.blob());
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = /filename="([^"]+)"/.exec(res.headers.get("content-disposition") ?? "")?.[1] ?? "certificate.pdf";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 10_000);
+      toast.success("Certificate downloaded", { id: toastId, description: "Saved as a PDF — print it or share it." });
+    } catch (err) {
+      toast.error("Couldn't download the certificate", { id: toastId, description: (err as Error).message });
+    } finally {
+      setDownloading(false);
+    }
+  };
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(c.verifyUrl);
@@ -42,11 +65,11 @@ export function CertificateCard({ c }: { c: CertificateItem }) {
         </div>
       </dl>
       <div className="mt-5 flex flex-wrap gap-2">
-        {c.certificateUrl && (
-          <a href={c.certificateUrl} target="_blank" rel="noopener noreferrer" className="academy-gradient inline-flex h-10 items-center gap-2 rounded-xl px-4 body-sm-medium font-semibold text-white">
+        {valid && (
+          <motion.button type="button" whileTap={{ scale: 0.95 }} onClick={download} disabled={downloading} className="academy-gradient inline-flex h-10 items-center gap-2 rounded-xl px-4 body-sm-medium font-semibold text-white disabled:opacity-60">
             <Download className="h-4 w-4" />
-            Download
-          </a>
+            {downloading ? "Preparing…" : "Download PDF"}
+          </motion.button>
         )}
         <a href={c.verifyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex h-10 items-center gap-2 rounded-xl border border-accent px-4 body-sm-medium text-accent hover:bg-accent-10">
           <ShieldCheck className="h-4 w-4" />

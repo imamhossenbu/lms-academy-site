@@ -13,7 +13,7 @@ import { SubmitButton } from "@/components/ui/SubmitButton";
 const exts = (col: string) => col.split(/[,\s]+/).map((e) => e.trim().toLowerCase()).filter(Boolean).map((e) => (e.startsWith(".") ? e : `.${e}`));
 
 /** Answer box for the assignment's type: file upload, written answer or a link. Validated before upload. */
-export function SubmitAssignmentForm({ a }: { a: AssignmentItem }) {
+export function SubmitAssignmentForm({ a }: { a: Pick<AssignmentItem, "id" | "type" | "allowedFileTypes" | "maxFileSizeMb" | "attempts"> }) {
   const router = useRouter();
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);

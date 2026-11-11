@@ -8,6 +8,9 @@ import { VideoPlayer } from "./VideoPlayer";
 import { LessonResources } from "./LessonResources";
 import { LessonNav } from "./LessonNav";
 import { QuizRunner } from "./quiz/QuizRunner";
+import { LessonAssignment } from "./LessonAssignment";
+import { LessonLive } from "./LessonLive";
+import { CourseQuestions } from "./CourseQuestions";
 import { LessonTypeIcon } from "./lessonIcons";
 
 /** One lesson: video (if any), title + type, sanitised body, quiz (QUIZ lessons), resources, prev / complete / next. */
@@ -16,7 +19,7 @@ export function LessonView({ lesson, courseSlug, prevId, nextId }: { lesson: Les
   const isQuiz = lesson.type === "QUIZ" && !!lesson.quizId;
   return (
     <article className="mx-auto max-w-4xl space-y-8 px-4 py-8 sm:px-6 lg:py-10">
-      {lesson.videoUrl && <VideoPlayer url={lesson.videoUrl} title={lesson.title} />}
+      {lesson.videoUrl && <VideoPlayer url={lesson.videoUrl} title={lesson.title} courseSlug={courseSlug} lessonId={lesson.id} startAt={lesson.completed ? 0 : lesson.lastPosition} />}
       <header>
         <div className="flex flex-wrap items-center gap-2">
           <ToneBadge tone="accent" icon={<LessonTypeIcon type={lesson.type} className="h-3.5 w-3.5" />}>
@@ -35,8 +38,11 @@ export function LessonView({ lesson, courseSlug, prevId, nextId }: { lesson: Les
       {body && <div className="academy-prose" dangerouslySetInnerHTML={{ __html: body }} />}
       {isQuiz && <QuizRunner quizId={lesson.quizId!} courseSlug={courseSlug} lessonId={lesson.id} completed={lesson.completed} />}
       {lesson.type === "QUIZ" && !lesson.quizId && <p className="rounded-xl border border-night-line bg-night-surface p-4 body-sm-regular text-night-soft">The quiz for this lesson isn&apos;t published yet — check back soon.</p>}
+      {lesson.type === "ASSIGNMENT" && lesson.assignment && <LessonAssignment a={lesson.assignment} />}
+      {lesson.type === "LIVE" && <LessonLive live={lesson.live ?? null} />}
       <LessonResources resources={lesson.resources} />
       <LessonNav courseSlug={courseSlug} lessonId={lesson.id} completed={lesson.completed} prevId={prevId} nextId={nextId} canComplete={!isQuiz} />
+      <CourseQuestions courseSlug={courseSlug} />
     </article>
   );
 }

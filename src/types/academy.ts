@@ -200,6 +200,21 @@ export interface LessonDetail {
   completed: boolean;
   lastPosition: number;
   quizId: string | null;
+  /** ASSIGNMENT lessons: the attached assignment and this learner's latest submission. */
+  assignment?: (Omit<AssignmentItem, "course"> & { course?: AssignmentItem["course"] }) | null;
+  /** LIVE lessons: the course's next live class (join link only shortly before it starts). */
+  live?: { id: string; title: string; startTime: string; endTime: string; status: "LIVE" | "UPCOMING"; joinUrl: string | null } | null;
+}
+
+export interface QuestionThread {
+  id: string;
+  title: string;
+  bodyHtml: string;
+  isResolved: boolean;
+  isLocked: boolean;
+  createdAt: string;
+  author: { name: string; avatar: string | null; isInstructor: boolean; isMe: boolean };
+  replies: { id: string; bodyHtml: string; isAccepted: boolean; createdAt: string; author: { name: string; avatar: string | null; isInstructor: boolean; isMe: boolean } }[];
 }
 
 export type QuizKind = "MULTIPLE_CHOICE" | "MULTIPLE_SELECT" | "TRUE_FALSE" | "SHORT_ANSWER";

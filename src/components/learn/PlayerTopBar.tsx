@@ -10,7 +10,7 @@ import { ProgressRing } from "./ProgressRing";
 export function PlayerTopBar({ outline, onOpenContents }: { outline: PlayerOutline; onOpenContents: () => void }) {
   return (
     <div className="flex items-center gap-4 border-b border-night-line bg-night-surface/60 px-4 py-3 sm:px-6">
-      <Link href="/my-courses" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-night-line text-night-soft transition-colors hover:border-accent hover:text-white" aria-label="Back to my courses">
+      <Link href="/dashboard?tab=courses" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-night-line text-night-soft transition-colors hover:border-accent hover:text-white" aria-label="Back to my dashboard">
         <ArrowLeft className="h-4 w-4" />
       </Link>
       <div className="min-w-0 flex-1">

@@ -25,8 +25,8 @@ export function MobileMenu({ onClose, user }: { onClose: () => void; user: Heade
         ))}
         <div className="grid grid-cols-2 gap-2 pt-3">
           {user ? (
-            <ButtonLink href="/my-courses" className="col-span-2" icon={<BookOpen className="h-4 w-4" />}>
-              My courses
+            <ButtonLink href="/dashboard" className="col-span-2" icon={<BookOpen className="h-4 w-4" />}>
+              My dashboard
             </ButtonLink>
           ) : (
             <>

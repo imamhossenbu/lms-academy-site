@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
-import { BookOpen, ChevronDown, LogOut } from "lucide-react";
+import { BookOpen, ChevronDown, LayoutDashboard, LogOut, UserCog } from "lucide-react";
 import { postJson } from "@/lib/clientApi";
 import { Avatar } from "@/components/ui/Avatar";
 
@@ -67,10 +67,16 @@ export function UserMenu({ user }: { user: HeaderUser }) {
               <p className="body-xsm-regular truncate text-night-muted">{user.email}</p>
             </div>
             <div className="p-1.5">
-              <Link href="/my-courses" role="menuitem" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 body-sm-medium text-white hover:bg-accent-soft hover:text-accent">
-                <BookOpen className="h-4 w-4" />
-                My courses
-              </Link>
+              {[
+                { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+                { href: "/dashboard?tab=courses", icon: BookOpen, label: "My courses" },
+                { href: "/dashboard?tab=profile", icon: UserCog, label: "Profile & security" },
+              ].map((l) => (
+                <Link key={l.href} href={l.href} role="menuitem" onClick={() => setOpen(false)} className="flex items-center gap-2.5 rounded-xl px-3 py-2.5 body-sm-medium text-white hover:bg-accent-soft hover:text-accent">
+                  <l.icon className="h-4 w-4" />
+                  {l.label}
+                </Link>
+              ))}
               <button type="button" role="menuitem" onClick={signOut} className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 body-sm-medium text-red hover:bg-red-14">
                 <LogOut className="h-4 w-4" />
                 Sign out

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import type { CheckoutQuote, CheckoutResult, LessonDetail, MyCourse, PlayerOutline } from "@/types/academy";
+import type { AssignmentItem, CertificateItem, CheckoutQuote, CheckoutResult, DashboardOverview, LearnerProfile, LessonDetail, LiveItem, MyCourse, OrderItem, PlayerOutline, QuizResultItem } from "@/types/academy";
 import { backend } from "./server/backend";
 import { getSession } from "./session";
 import { getAcademySlug } from "./tenant";
@@ -31,3 +31,11 @@ export const fetchMyCourses = () => me<MyCourse[]>("/courses");
 
 export const fetchOutline = (courseSlug: string) => me<PlayerOutline>(`/learn/${encodeURIComponent(courseSlug)}`);
 export const fetchLesson = (courseSlug: string, lessonId: string) => me<LessonDetail>(`/learn/${encodeURIComponent(courseSlug)}/lessons/${encodeURIComponent(lessonId)}`);
+
+export const fetchDashboard = () => me<DashboardOverview>("/dashboard");
+export const fetchLiveClasses = (when: "upcoming" | "past") => me<LiveItem[]>(`/live-classes?when=${when}`);
+export const fetchAssignments = () => me<AssignmentItem[]>("/assignments");
+export const fetchQuizResults = () => me<QuizResultItem[]>("/quiz-results");
+export const fetchCertificates = () => me<CertificateItem[]>("/certificates");
+export const fetchOrders = () => me<OrderItem[]>("/orders");
+export const fetchProfile = () => me<LearnerProfile>("/profile");

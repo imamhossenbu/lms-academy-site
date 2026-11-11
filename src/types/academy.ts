@@ -225,3 +225,96 @@ export interface QuizSubmitResult {
   passed?: boolean;
   questions?: { questionId: string; correct: boolean; correctOptionIds?: string[]; acceptedAnswers?: string[]; explanationHtml?: string }[];
 }
+
+// ---------------------------------------------------------------- learner dashboard (/dashboard)
+
+export interface LiveItem {
+  id: string;
+  title: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+  status: "LIVE" | "UPCOMING" | "ENDED";
+  joinUrl: string | null;
+  recordingUrl: string | null;
+  platform: string;
+  course: { slug: string; title: string };
+  instructor: string;
+}
+
+export interface QuizResultItem {
+  id: string;
+  quizTitle: string;
+  lessonId: string | null;
+  course: { slug: string; title: string };
+  score: number;
+  totalMarks: number;
+  percentage: number;
+  passed: boolean;
+  attemptNumber: number;
+  submittedAt: string;
+}
+
+export interface DashboardOverview {
+  stats: { courses: number; completedCourses: number; lessonsCompleted: number; averageProgress: number; certificates: number; pendingAssignments: number };
+  continueLearning: { slug: string; title: string; thumbnail: string | null; instructor: string; progress: number } | null;
+  upcomingLive: LiveItem[];
+  recentQuizzes: QuizResultItem[];
+}
+
+export interface AssignmentItem {
+  id: string;
+  title: string;
+  type: "FILE_UPLOAD" | "TEXT" | "LINK" | string;
+  dueDate: string;
+  marks: number;
+  instructionsHtml: string;
+  description: string | null;
+  allowedFileTypes: string;
+  maxFileSizeMb: number;
+  maxAttempts: number | null;
+  course: { slug: string; title: string };
+  state: "TODO" | "OVERDUE" | "SUBMITTED" | "GRADED";
+  attempts: number;
+  attemptsLeft: number | null;
+  canSubmit: boolean;
+  lastSubmission: { id: string; status: string; submittedAt: string; marksObtained: number | null; feedback: string | null; attempt: number; isLate: boolean; fileUrl: string | null; fileName: string; textAnswer: string | null } | null;
+}
+
+export interface CertificateItem {
+  id: string;
+  certificateNumber: string;
+  verificationCode: string;
+  certificateUrl: string | null;
+  verifyUrl: string;
+  issuedAt: string;
+  status: "VALID" | "REVOKED" | string;
+  grade: number | null;
+  expiresAt: string | null;
+  course: { slug: string; title: string; thumbnail: string | null };
+}
+
+export interface OrderItem {
+  id: string;
+  orderNumber: string;
+  status: "PAID" | "PENDING" | "FAILED" | "CANCELLED" | "REFUNDED";
+  totalAmount: number;
+  discountAmount: number;
+  currency: AcademyCurrency;
+  paymentMethod: string | null;
+  createdAt: string;
+  paidAt: string | null;
+  course: { slug: string; title: string; thumbnail: string | null };
+  invoice: { invoiceUrl: string; invoiceNumber: string } | null;
+}
+
+export interface LearnerProfile {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  avatar: string | null;
+  bio: string | null;
+  country: string | null;
+  createdAt: string;
+}

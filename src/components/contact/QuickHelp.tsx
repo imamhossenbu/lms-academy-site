@@ -8,7 +8,7 @@ import type { AcademyProfile } from "@/types/academy";
 export function QuickHelp({ stats, signedIn }: { stats: AcademyProfile["stats"]; signedIn: boolean }) {
   const links = [
     { href: "/courses", icon: BookOpen, label: "Browse all courses" },
-    signedIn ? { href: "/my-courses", icon: GraduationCap, label: "Go to my courses" } : { href: "/login?next=/my-courses", icon: GraduationCap, label: "Sign in to your account" },
+    signedIn ? { href: "/dashboard", icon: GraduationCap, label: "Go to my dashboard" } : { href: "/login?next=/dashboard", icon: GraduationCap, label: "Sign in to your account" },
     { href: "/about", icon: Info, label: "About us" },
   ];
   const facts = [

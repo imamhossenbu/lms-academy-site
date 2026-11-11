@@ -3,6 +3,7 @@ export const NAV_LINKS: { href: string; label: string }[] = [
   { href: "/", label: "Home" },
   { href: "/courses", label: "Courses" },
   { href: "/instructors", label: "Instructors" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 

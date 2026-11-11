@@ -10,6 +10,9 @@ import { StudentReviews } from "@/components/home/StudentReviews";
 import { InstructorsPreview } from "@/components/home/InstructorsPreview";
 import { MissionSection } from "@/components/home/MissionSection";
 import { FinalCta } from "@/components/home/FinalCta";
+import { WhatYouGet } from "@/components/home/WhatYouGet";
+import { FaqSection } from "@/components/home/FaqSection";
+import { NewsletterSection } from "@/components/newsletter/NewsletterSection";
 
 export default async function HomePage() {
   const academy = await requireAcademy();
@@ -21,10 +24,13 @@ export default async function HomePage() {
       <CourseShowcase courses={popular.data} total={popular.pagination.total} currency={academy.currency} />
       <CategoryGrid categories={academy.categories} />
       <HowItWorks />
+      <WhatYouGet />
       <StatsGlobe academy={academy} />
       <StudentReviews reviews={reviews} rating={academy.stats.rating} total={academy.stats.reviews} />
       <InstructorsPreview instructors={instructors} />
       <MissionSection mission={academy.site?.mission} />
+      <FaqSection faqs={academy.site?.faqs} />
+      <NewsletterSection newsletter={academy.site?.newsletter} />
       <FinalCta academyName={academy.name} />
     </>
   );

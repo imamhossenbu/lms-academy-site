@@ -32,13 +32,17 @@ export interface AcademyProfile {
   maintenance: { enabled: boolean; message: string; until: string };
   stats: { courses: number; students: number; instructors: number; lessons: number; rating: number; reviews: number };
   categories: AcademyCategory[];
-  /** Home-page content the admin fills in (Mission, mobile app). Absent / null until set up — the sections stay hidden. */
-  site?: AcademySiteContent | null;
+  /** Admin-edited website content (hero, mission, app, FAQ, socials, newsletter); null until set up. */
+  site: AcademySiteContent | null;
 }
 
 export interface AcademySiteContent {
-  mission?: { why: string; what: string; how: string; imageUrl: string } | null;
-  app?: { title: string; text: string; appStoreUrl: string; playStoreUrl: string; screenshotUrl: string } | null;
+  hero: { title: string; subtitle: string } | null;
+  mission: { why: string; what: string; how: string; imageUrl: string } | null;
+  app: { title: string; text: string; appStoreUrl: string; playStoreUrl: string; screenshotUrl: string } | null;
+  faqs: { question: string; answer: string }[];
+  socials: { facebook: string; instagram: string; youtube: string; linkedin: string; tiktok: string };
+  newsletter: { enabled: boolean; title: string; text: string };
 }
 
 export interface AcademyInstructorSummary {

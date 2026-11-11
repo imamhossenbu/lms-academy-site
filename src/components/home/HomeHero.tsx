@@ -34,10 +34,10 @@ export function HomeHero({ academy, signedIn }: { academy: AcademyProfile; signe
             <span className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-accent/30 bg-accent-10 px-4 py-1.5 body-sm-medium text-accent">Welcome to {academy.name}</span>
           </StaggerItem>
           <StaggerItem as="h1" className="heading-hero mt-6 text-white">
-            <CursorTitle text="Learn Today_ Lead Tomorrow" />
+            <CursorTitle text={academy.site?.hero?.title || "Learn Today_ Lead Tomorrow"} />
           </StaggerItem>
           <StaggerItem as="p" className="body-hero mx-auto mt-5 max-w-2xl text-night-soft">
-            {academy.tagline || `Practical courses and hands-on practice from ${academy.name} — learn at your own pace and build skills that get you hired.`}
+            {academy.site?.hero?.subtitle || academy.tagline || `Practical courses and hands-on practice from ${academy.name} — learn at your own pace and build skills that get you hired.`}
           </StaggerItem>
           <StaggerItem className="mt-9 flex flex-wrap justify-center gap-3">
             <ExploreButton href="/courses" label="Explore courses" />

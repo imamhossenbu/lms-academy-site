@@ -5,7 +5,7 @@ const clean = (u: string) => u.replace(/\/$/, "");
 export const API_URL = clean(process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || (DEV ? "http://localhost:4077" : ""));
 
 /** Academy sites are served at <slug>.<ACADEMY_ROOT_DOMAIN>; anything else is looked up as a custom domain. */
-export const ACADEMY_ROOT_DOMAIN = (process.env.ACADEMY_ROOT_DOMAIN || "").trim().toLowerCase();
+export const ACADEMY_ROOT_DOMAIN = (process.env.ACADEMY_ROOT_DOMAIN || (DEV ? "" : "edupro.com")).trim().toLowerCase();
 
 /** Academy used on localhost / preview hosts when the URL doesn't name one (development). */
 export const DEFAULT_ACADEMY_SLUG = (process.env.DEFAULT_ACADEMY_SLUG || (DEV ? "edupro-academy" : "")).trim().toLowerCase();

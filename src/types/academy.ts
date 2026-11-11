@@ -43,6 +43,7 @@ export interface AcademySiteContent {
   faqs: { question: string; answer: string }[];
   socials: { facebook: string; instagram: string; youtube: string; linkedin: string; tiktok: string };
   newsletter: { enabled: boolean; title: string; text: string };
+  officeHours: string;
 }
 
 export interface AcademyInstructorSummary {
